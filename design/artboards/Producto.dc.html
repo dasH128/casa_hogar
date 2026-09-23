@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ficha de producto</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap">
+<style>
+body{margin:0}
+a{color:#14453C}a:hover{color:#0C2E28}
+</style>
+</helmet>
+<div style="width: 1440px; height: 900px; box-sizing: border-box; display: flex; font-family: 'IBM Plex Sans', system-ui, sans-serif; background: #F6F4EF; color: #14130F; font-size: 13px">
+
+  <nav aria-label="Principal" style="width: 216px; flex-shrink: 0; background: #1B1A15; color: #E8E3D6; display: flex; flex-direction: column; box-sizing: border-box; padding: 20px 0">
+    <div style="padding: 0 20px 22px 20px">
+      <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; line-height: 1; color: #FFFFFF">Morella</div>
+      <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #9B9683; margin-top: 6px">Ventas y almacén</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px; padding: 0 12px">
+      <a href="Main.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Ventas</a>
+      <a href="Compra.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Compras</a>
+      <a href="Documentos.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Documentos</a>
+      <a href="Producto.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; background: #33312A; color: #FFFFFF; text-decoration: none; font-weight: 600">Catálogo</a>
+      <a href="Cliente.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Clientes</a>
+      <a href="Usuarios.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Usuarios</a>
+    </div>
+    <div style="flex-grow: 1"></div>
+    <div style="padding: 16px 20px 0 20px; border-top: 1px solid #33312A; margin: 0 8px">
+      <div style="font-weight: 600; color: #FFFFFF">Rosa Medina</div>
+      <div style="font-size: 11px; color: #9B9683; margin-top: 2px">Gerente · Sucursal M</div>
+    </div>
+  </nav>
+
+  <div style="flex-grow: 1; display: flex; flex-direction: column; min-width: 0">
+
+    <header style="height: 62px; flex-shrink: 0; box-sizing: border-box; padding: 0 22px; border-bottom: 1px solid #E3DED1; background: #FFFFFF; display: flex; align-items: center; gap: 14px">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #4F4C42">004848</span>
+      <h1 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.01em">Plato Morella #9 hotelero hondo redondo</h1>
+      <div style="flex-grow: 1"></div>
+      <button type="button" style="height: 36px; padding: 0 18px; border: 1px solid #14453C; background: #14453C; color: #FFFFFF; border-radius: 5px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Guardar · F2</button>
+    </header>
+
+    <div style="flex-grow: 1; min-height: 0; box-sizing: border-box; padding: 18px 22px; display: flex; gap: 14px">
+
+      <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+
+        <section aria-label="Atributos" style="background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; padding: 16px">
+          <div style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600; margin-bottom: 14px">Atributos</div>
+          <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 13px">
+            <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 5px">
+              <label for="p-fam" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Familia</label>
+              <select id="p-fam" style="height: 36px; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: inherit; font-size: 13px; padding: 0 8px; color: #14130F"><option>Plato Morella hotelero</option></select>
+            </div>
+            <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 5px">
+              <label for="p-mod" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Modelo</label>
+              <input id="p-mod" type="text" value="P9H-RH" style="height: 36px; box-sizing: border-box; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 0 10px">
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <label for="p-tam" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Tamaño</label>
+              <input id="p-tam" type="text" value="9.0" style="height: 36px; box-sizing: border-box; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 0 10px">
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <label for="p-um" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Unidad base</label>
+              <select id="p-um" style="height: 36px; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: inherit; font-size: 13px; padding: 0 8px; color: #14130F"><option>NIU</option></select>
+            </div>
+            <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 5px">
+              <label for="p-forma" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Forma</label>
+              <select id="p-forma" style="height: 36px; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: inherit; font-size: 13px; padding: 0 8px; color: #14130F"><option>Redondo</option></select>
+            </div>
+            <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 5px">
+              <label for="p-perfil" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Perfil</label>
+              <select id="p-perfil" style="height: 36px; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: inherit; font-size: 13px; padding: 0 8px; color: #14130F"><option>Hondo</option></select>
+            </div>
+            <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 5px">
+              <label for="p-linea" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Línea</label>
+              <input id="p-linea" type="text" value="HOTELERO" style="height: 36px; box-sizing: border-box; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: inherit; font-size: 13px; padding: 0 10px">
+            </div>
+          </div>
+          <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid #F0EDE3; display: flex; flex-direction: column; gap: 5px">
+            <label for="p-desc" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Descripción en documentos</label>
+            <input id="p-desc" type="text" value="PLATO MORELLA #9 HOTELERO HONDO REDONDO P9H-RH" readonly style="height: 36px; box-sizing: border-box; border: 1px solid #E3DED1; border-radius: 4px; background: #F6F4EF; font-family: inherit; font-size: 13px; padding: 0 10px; color: #4F4C42">
+            <span style="font-size: 11px; color: #6B6759">Se compone desde los atributos. Cambiar el modelo o el tamaño la actualiza en todo el catálogo.</span>
+          </div>
+        </section>
+
+        <section aria-label="Presentaciones" style="background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; overflow: hidden">
+          <div style="padding: 14px 16px 12px 16px; display: flex; align-items: center; gap: 12px">
+            <div style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Presentaciones</div>
+            <div style="flex-grow: 1"></div>
+            <button type="button" style="height: 30px; padding: 0 12px; border: 1px solid #D3CDBC; background: #FFFFFF; color: #14130F; border-radius: 4px; font-family: inherit; font-size: 12px; cursor: pointer">Añadir</button>
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 12.5px">
+            <thead>
+              <tr style="background: #F1EEE5; color: #4F4C42">
+                <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 16px; width: 90px; border-top: 1px solid #E3DED1; border-bottom: 1px solid #E3DED1">Código</th>
+                <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 8px; border-top: 1px solid #E3DED1; border-bottom: 1px solid #E3DED1">Nombre</th>
+                <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 8px; width: 52px; border-top: 1px solid #E3DED1; border-bottom: 1px solid #E3DED1">UM</th>
+                <th scope="col" style="text-align: right; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 8px; width: 66px; border-top: 1px solid #E3DED1; border-bottom: 1px solid #E3DED1">Factor</th>
+                <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 8px; width: 148px; border-top: 1px solid #E3DED1; border-bottom: 1px solid #E3DED1">Rol</th>
+                <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 16px 9px 8px; width: 112px; border-top: 1px solid #E3DED1; border-bottom: 1px solid #E3DED1">SKU antiguo</th>
+              </tr>
+            </thead>
+            <tbody style="font-variant-numeric: tabular-nums">
+              <tr>
+                <td style="padding: 10px 16px; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">UND</td>
+                <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3">Unidad suelta</td>
+                <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">NIU</td>
+                <td style="padding: 10px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">1</td>
+                <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #14453C; background: #E2EDE7; border-radius: 3px; padding: 3px 7px">Base · venta</span></td>
+                <td style="padding: 10px 16px 10px 8px; color: #8A8574; border-bottom: 1px solid #F0EDE3">—</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 16px; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">CAJA48</td>
+                <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3">Caja x 48 unidades</td>
+                <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">BX</td>
+                <td style="padding: 10px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">48</td>
+                <td style="padding: 10px 8px; color: #8A8574; border-bottom: 1px solid #F0EDE3">—</td>
+                <td style="padding: 10px 16px 10px 8px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">004848</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 16px; font-family: 'IBM Plex Mono', monospace">CAJA72</td>
+                <td style="padding: 10px 8px">Caja x 72 unidades</td>
+                <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42">BX</td>
+                <td style="padding: 10px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">72</td>
+                <td style="padding: 10px 8px"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #1B4F82; background: #E1EAF3; border-radius: 3px; padding: 3px 7px">Compra</span></td>
+                <td style="padding: 10px 16px 10px 8px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42">005548</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="padding: 11px 16px; background: #FAF8F3; border-top: 1px solid #E3DED1; font-size: 11.5px; color: #4F4C42">Un producto, un stock. En el sistema anterior 004848 y 005548 eran dos códigos distintos unidos por Cod.Anexo.</div>
+        </section>
+
+        <section aria-label="Datos fiscales" style="background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; padding: 16px">
+          <div style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600; margin-bottom: 13px">Datos fiscales</div>
+          <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 13px; align-items: end">
+            <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 5px">
+              <label for="p-igv" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Afectación IGV</label>
+              <select id="p-igv" style="height: 36px; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: inherit; font-size: 13px; padding: 0 8px; color: #14130F"><option>10 · Gravado onerosa</option></select>
+            </div>
+            <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 5px">
+              <label for="p-unspsc" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Código de producto SUNAT</label>
+              <input id="p-unspsc" type="text" value="52151504" style="height: 36px; box-sizing: border-box; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 0 10px">
+            </div>
+            <div style="grid-column: span 2; display: flex; gap: 8px; align-items: flex-start; background: #F9F1E1; border: 1px solid #DCC79A; border-radius: 5px; padding: 9px 11px">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A5200" stroke-width="2" style="flex-shrink: 0; margin-top: 1px" aria-hidden="true"><path d="M12 8v5"/><circle cx="12" cy="16.6" r="0.9" fill="#7A5200" stroke="none"/><path d="M12 3.5L21.5 20H2.5z"/></svg>
+              <span style="font-size: 11.5px; color: #6B4700; line-height: 1.5">Ocho dígitos del catálogo 25. Desde el 01/01/2027 un código inválido rechaza el comprobante (error 3496).</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <aside style="width: 286px; flex-shrink: 0; display: flex; flex-direction: column; gap: 12px">
+        <div style="background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; padding: 14px 16px">
+          <div style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600; margin-bottom: 11px">Stock por almacén</div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; border-bottom: 1px solid #F0EDE3">
+            <span style="color: #4F4C42">MORELLA - VICTORIA</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-variant-numeric: tabular-nums">51,504</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0">
+            <span style="color: #4F4C42">MORELLA - CENTRO</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-variant-numeric: tabular-nums">2,160</span>
+          </div>
+          <div style="margin-top: 11px; padding-top: 11px; border-top: 1px solid #E3DED1; font-size: 11.5px; color: #6B6759; line-height: 1.5">El saldo es la suma del libro de movimientos, no una columna editable.</div>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; padding: 14px 16px; font-variant-numeric: tabular-nums">
+          <div style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600; margin-bottom: 11px">Coste y precio</div>
+          <div style="display: flex; justify-content: space-between; padding: 5px 0; color: #4F4C42"><span>Coste medio</span><span style="font-family: 'IBM Plex Mono', monospace">S/ 1.4602</span></div>
+          <div style="display: flex; justify-content: space-between; padding: 5px 0; color: #4F4C42"><span>Precio unidad</span><span style="font-family: 'IBM Plex Mono', monospace">S/ 2.4500</span></div>
+          <div style="display: flex; justify-content: space-between; padding: 5px 0; color: #4F4C42"><span>Precio caja x48</span><span style="font-family: 'IBM Plex Mono', monospace">S/ 88.0000</span></div>
+          <div style="display: flex; justify-content: space-between; padding: 9px 0 0 0; margin-top: 6px; border-top: 1px solid #F0EDE3"><span style="font-weight: 600">Margen</span><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600">29.6 %</span></div>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; padding: 14px 16px">
+          <div style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600; margin-bottom: 11px">Últimos movimientos</div>
+          <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #F0EDE3; font-size: 12px"><span style="color: #4F4C42">05/01 · CI 001-0000070</span><span style="font-family: 'IBM Plex Mono', monospace; color: #14453C">+51,504</span></div>
+          <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #F0EDE3; font-size: 12px"><span style="color: #4F4C42">02/08 · NS 000-0000163</span><span style="font-family: 'IBM Plex Mono', monospace; color: #8A350C">−1,440</span></div>
+          <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 12px"><span style="color: #4F4C42">03/08 · NS 000-0000165</span><span style="font-family: 'IBM Plex Mono', monospace; color: #8A350C">−1,392</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

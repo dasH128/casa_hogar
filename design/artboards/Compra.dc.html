@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Compra de importación</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap">
+<style>
+body{margin:0}
+a{color:#14453C}a:hover{color:#0C2E28}
+</style>
+</helmet>
+<div style="width: 1440px; height: 900px; box-sizing: border-box; display: flex; font-family: 'IBM Plex Sans', system-ui, sans-serif; background: #F6F4EF; color: #14130F; font-size: 13px">
+
+  <nav aria-label="Principal" style="width: 216px; flex-shrink: 0; background: #1B1A15; color: #E8E3D6; display: flex; flex-direction: column; box-sizing: border-box; padding: 20px 0">
+    <div style="padding: 0 20px 22px 20px">
+      <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; line-height: 1; color: #FFFFFF">Morella</div>
+      <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #9B9683; margin-top: 6px">Ventas y almacén</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px; padding: 0 12px">
+      <a href="Main.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Ventas</a>
+      <a href="Compra.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; background: #33312A; color: #FFFFFF; text-decoration: none; font-weight: 600">Compras</a>
+      <a href="Documentos.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Documentos</a>
+      <a href="Producto.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Catálogo</a>
+      <a href="Cliente.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Clientes</a>
+      <a href="Usuarios.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Usuarios</a>
+    </div>
+    <div style="flex-grow: 1"></div>
+    <div style="padding: 16px 20px 0 20px; border-top: 1px solid #33312A; margin: 0 8px">
+      <div style="font-weight: 600; color: #FFFFFF">Jamile Delgado</div>
+      <div style="font-size: 11px; color: #9B9683; margin-top: 2px">Almacén · Sucursal M</div>
+    </div>
+  </nav>
+
+  <div style="flex-grow: 1; display: flex; flex-direction: column; min-width: 0">
+
+    <header style="height: 62px; flex-shrink: 0; box-sizing: border-box; padding: 0 22px; border-bottom: 1px solid #E3DED1; background: #FFFFFF; display: flex; align-items: center; gap: 14px">
+      <h1 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.01em">Compra de importación</h1>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4F4C42; background: #F1EEE5; border: 1px solid #E3DED1; border-radius: 4px; padding: 3px 8px">CI 001-0000070</span>
+      <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #4F4C42; background: #EDEAE0; border-radius: 3px; padding: 4px 9px">Borrador</span>
+      <div style="flex-grow: 1"></div>
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4F4C42">US$ · T.C. 3.5000</div>
+      <button type="button" style="height: 36px; padding: 0 16px; border: 1px solid #D3CDBC; background: #FFFFFF; color: #14130F; border-radius: 5px; font-family: inherit; font-size: 13px; cursor: pointer">Adjuntar invoice</button>
+      <button type="button" style="height: 36px; padding: 0 18px; border: 1px solid #14453C; background: #14453C; color: #FFFFFF; border-radius: 5px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Ingresar a almacén · F2</button>
+    </header>
+
+    <div style="flex-grow: 1; min-height: 0; box-sizing: border-box; padding: 18px 22px; display: flex; flex-direction: column; gap: 14px">
+
+      <section aria-label="Cabecera de la compra" style="background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; padding: 16px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 14px">
+        <div style="grid-column: span 5; display: flex; flex-direction: column; gap: 5px">
+          <label for="c-prov" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Proveedor</label>
+          <input id="c-prov" type="text" value="NINGBO YUN RUI TRADING CO. LTD" style="height: 36px; box-sizing: border-box; border: 1px solid #14453C; border-radius: 4px; background: #FFFFFF; font-family: inherit; font-size: 13px; padding: 0 10px; font-weight: 500">
+          <span style="font-size: 11px; color: #6B6759">No domiciliado · sin RUC</span>
+        </div>
+        <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 5px">
+          <label for="c-mon" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Moneda</label>
+          <select id="c-mon" style="height: 36px; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: inherit; font-size: 13px; padding: 0 8px; color: #14130F"><option>Dólares (US$)</option></select>
+        </div>
+        <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 5px">
+          <label for="c-tc" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Tipo de cambio</label>
+          <input id="c-tc" type="text" value="3.5000" style="height: 36px; box-sizing: border-box; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 0 10px">
+          <span style="font-size: 11px; color: #6B6759">Se congela al confirmar</span>
+        </div>
+        <div style="grid-column: span 3; display: flex; flex-direction: column; gap: 5px">
+          <label for="c-inv" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Invoice del proveedor</label>
+          <input id="c-inv" type="text" value="2025C130" style="height: 36px; box-sizing: border-box; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 0 10px">
+        </div>
+        <div style="grid-column: span 4; display: flex; flex-direction: column; gap: 5px">
+          <label for="c-alm" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Almacén de ingreso</label>
+          <select id="c-alm" style="height: 36px; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: inherit; font-size: 13px; padding: 0 8px; color: #14130F"><option>MORELLA - VICTORIA</option></select>
+        </div>
+        <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 5px">
+          <label for="c-emi" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Emisión</label>
+          <input id="c-emi" type="text" value="05/01/2026" style="height: 36px; box-sizing: border-box; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 0 10px">
+        </div>
+        <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 5px">
+          <label for="c-ing" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Fecha de almacén</label>
+          <input id="c-ing" type="text" value="05/01/2026" style="height: 36px; box-sizing: border-box; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 0 10px">
+        </div>
+        <div style="grid-column: span 4; display: flex; flex-direction: column; gap: 5px">
+          <label for="c-cond" style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Condición</label>
+          <select id="c-cond" style="height: 36px; border: 1px solid #D3CDBC; border-radius: 4px; background: #FFFFFF; font-family: inherit; font-size: 13px; padding: 0 8px; color: #14130F"><option>Compra</option></select>
+        </div>
+      </section>
+
+      <div style="flex-grow: 1; min-height: 0; display: flex; gap: 14px">
+
+        <section aria-label="Líneas de la compra" style="flex-grow: 1; min-width: 0; background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; overflow: hidden">
+          <table style="width: 100%; border-collapse: collapse; font-size: 12px">
+            <thead>
+              <tr style="background: #F1EEE5; color: #4F4C42">
+                <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 12px; width: 62px; border-bottom: 1px solid #E3DED1">SKU</th>
+                <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 8px; border-bottom: 1px solid #E3DED1">Descripción</th>
+                <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 8px; width: 86px; border-bottom: 1px solid #E3DED1">Present.</th>
+                <th scope="col" style="text-align: right; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 8px; width: 64px; border-bottom: 1px solid #E3DED1">Cajas</th>
+                <th scope="col" style="text-align: right; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 8px; width: 78px; border-bottom: 1px solid #E3DED1">Unidades</th>
+                <th scope="col" style="text-align: right; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 8px; width: 82px; border-bottom: 1px solid #E3DED1">Precio U.</th>
+                <th scope="col" style="text-align: right; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 12px 9px 8px; width: 94px; border-bottom: 1px solid #E3DED1">Importe</th>
+              </tr>
+            </thead>
+            <tbody style="font-variant-numeric: tabular-nums">
+              <tr>
+                <td style="padding: 7px 12px; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">004847</td>
+                <td style="padding: 7px 8px; border-bottom: 1px solid #F0EDE3">PLATO MORELLA #8 HOTELERO TENDIDO REDONDO</td>
+                <td style="padding: 7px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">CAJA x72</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">186</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #6B6759; border-bottom: 1px solid #F0EDE3">13,392</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">22.0894</td>
+                <td style="padding: 7px 12px 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-weight: 500; border-bottom: 1px solid #F0EDE3">4,108.64</td>
+              </tr>
+              <tr>
+                <td style="padding: 7px 12px; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">004848</td>
+                <td style="padding: 7px 8px; border-bottom: 1px solid #F0EDE3">PLATO MORELLA #9 HOTELERO HONDO REDONDO</td>
+                <td style="padding: 7px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">CAJA x48</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">200</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #6B6759; border-bottom: 1px solid #F0EDE3">9,600</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">20.0412</td>
+                <td style="padding: 7px 12px 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-weight: 500; border-bottom: 1px solid #F0EDE3">4,008.24</td>
+              </tr>
+              <tr style="background: #FAFBFA">
+                <td style="padding: 7px 12px; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">004848</td>
+                <td style="padding: 7px 8px; border-bottom: 1px solid #F0EDE3">PLATO MORELLA #9 HOTELERO HONDO REDONDO <span style="color: #6B6759; font-size: 11px">· antes 005548</span></td>
+                <td style="padding: 7px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">CAJA x72</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">582</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #6B6759; border-bottom: 1px solid #F0EDE3">41,904</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">28.4937</td>
+                <td style="padding: 7px 12px 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-weight: 500; border-bottom: 1px solid #F0EDE3">16,583.33</td>
+              </tr>
+              <tr>
+                <td style="padding: 7px 12px; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">004849</td>
+                <td style="padding: 7px 8px; border-bottom: 1px solid #F0EDE3">PLATO MORELLA #9 HOTELERO TENDIDO REDONDO</td>
+                <td style="padding: 7px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">CAJA x48</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">400</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #6B6759; border-bottom: 1px solid #F0EDE3">19,200</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">20.0127</td>
+                <td style="padding: 7px 12px 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-weight: 500; border-bottom: 1px solid #F0EDE3">8,005.08</td>
+              </tr>
+              <tr style="background: #FAFBFA">
+                <td style="padding: 7px 12px; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">004849</td>
+                <td style="padding: 7px 8px; border-bottom: 1px solid #F0EDE3">PLATO MORELLA #9 HOTELERO TENDIDO REDONDO <span style="color: #6B6759; font-size: 11px">· antes 005547</span></td>
+                <td style="padding: 7px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">CAJA x72</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">990</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #6B6759; border-bottom: 1px solid #F0EDE3">71,280</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">28.4652</td>
+                <td style="padding: 7px 12px 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-weight: 500; border-bottom: 1px solid #F0EDE3">28,180.54</td>
+              </tr>
+              <tr>
+                <td style="padding: 7px 12px; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">005261</td>
+                <td style="padding: 7px 8px; border-bottom: 1px solid #F0EDE3">PLATO MORELLA #9.5 HOTELERO HONDO CUADRADO</td>
+                <td style="padding: 7px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">CAJA x72</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">100</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #6B6759; border-bottom: 1px solid #F0EDE3">7,200</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">29.9890</td>
+                <td style="padding: 7px 12px 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-weight: 500; border-bottom: 1px solid #F0EDE3">2,998.90</td>
+              </tr>
+              <tr>
+                <td style="padding: 7px 12px; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">009040</td>
+                <td style="padding: 7px 8px; border-bottom: 1px solid #F0EDE3">PLATO MORELLA #9.5 HOTELERO TENDIDO REDONDO</td>
+                <td style="padding: 7px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">CAJA x72</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">200</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #6B6759; border-bottom: 1px solid #F0EDE3">14,400</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">28.9753</td>
+                <td style="padding: 7px 12px 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-weight: 500; border-bottom: 1px solid #F0EDE3">5,795.06</td>
+              </tr>
+              <tr>
+                <td style="padding: 7px 12px; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">004845</td>
+                <td style="padding: 7px 8px; border-bottom: 1px solid #F0EDE3">PLATO MORELLA #10.5 HOTELERO TENDIDO REDONDO</td>
+                <td style="padding: 7px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">CAJA x36</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">994</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #6B6759; border-bottom: 1px solid #F0EDE3">35,784</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">20.7327</td>
+                <td style="padding: 7px 12px 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-weight: 500; border-bottom: 1px solid #F0EDE3">20,608.30</td>
+              </tr>
+              <tr>
+                <td style="padding: 7px 12px; font-family: 'IBM Plex Mono', monospace">004844</td>
+                <td style="padding: 7px 8px">PLATO MORELLA #10.5 HOTELERO TENDIDO CUADRADO</td>
+                <td style="padding: 7px 8px; color: #4F4C42">CAJA x36</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">240</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #6B6759">8,640</td>
+                <td style="padding: 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">21.3667</td>
+                <td style="padding: 7px 12px 7px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-weight: 500">5,128.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <aside style="width: 296px; flex-shrink: 0; display: flex; flex-direction: column; gap: 12px">
+
+          <div style="background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; padding: 14px 16px; font-variant-numeric: tabular-nums">
+            <div style="display: flex; justify-content: space-between; padding: 5px 0; color: #4F4C42"><span>Monto neto</span><span style="font-family: 'IBM Plex Mono', monospace">80,861.12</span></div>
+            <div style="display: flex; justify-content: space-between; padding: 5px 0; color: #4F4C42; border-bottom: 1px solid #E3DED1; padding-bottom: 10px"><span>Impuesto 18 %</span><span style="font-family: 'IBM Plex Mono', monospace">14,555.00</span></div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 12px">
+              <span style="font-weight: 600">Total</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600; letter-spacing: -0.02em">US$ 95,416.12</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 9px; padding-top: 9px; border-top: 1px dashed #E3DED1; color: #4F4C42">
+              <span>Equivalente</span><span style="font-family: 'IBM Plex Mono', monospace">S/ 333,956.42</span>
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; padding: 14px 16px">
+            <div style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600; margin-bottom: 10px">Ingreso al almacén</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600; letter-spacing: -0.02em">221,400</div>
+            <div style="font-size: 12px; color: #4F4C42; margin-top: 2px">unidades base · 3,892 cajas</div>
+            <div style="font-size: 11.5px; color: #6B6759; margin-top: 11px; line-height: 1.55; border-top: 1px solid #F0EDE3; padding-top: 11px">El coste medio de cada producto se recalcula al confirmar, con el tipo de cambio de este documento.</div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; padding: 14px 16px">
+            <div style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600; margin-bottom: 9px">Precisión</div>
+            <div style="font-size: 11.5px; color: #4F4C42; line-height: 1.55; font-variant-numeric: tabular-nums">Los precios se guardan con 4 decimales. A 2 decimales, esta compra se desviaría <strong style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: #14130F">US$ 12.85</strong>.</div>
+          </div>
+
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

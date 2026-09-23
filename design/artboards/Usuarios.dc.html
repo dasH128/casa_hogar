@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Usuarios y permisos</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap">
+<style>
+body{margin:0}
+a{color:#14453C}a:hover{color:#0C2E28}
+</style>
+</helmet>
+<div style="width: 1440px; height: 900px; box-sizing: border-box; display: flex; font-family: 'IBM Plex Sans', system-ui, sans-serif; background: #F6F4EF; color: #14130F; font-size: 13px">
+
+  <nav aria-label="Principal" style="width: 216px; flex-shrink: 0; background: #1B1A15; color: #E8E3D6; display: flex; flex-direction: column; box-sizing: border-box; padding: 20px 0">
+    <div style="padding: 0 20px 22px 20px">
+      <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; line-height: 1; color: #FFFFFF">Morella</div>
+      <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #9B9683; margin-top: 6px">Ventas y almacén</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px; padding: 0 12px">
+      <a href="Main.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Ventas</a>
+      <a href="Compra.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Compras</a>
+      <a href="Documentos.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Documentos</a>
+      <a href="Producto.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Catálogo</a>
+      <a href="Cliente.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Clientes</a>
+      <a href="Usuarios.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; background: #33312A; color: #FFFFFF; text-decoration: none; font-weight: 600">Usuarios</a>
+    </div>
+    <div style="flex-grow: 1"></div>
+    <div style="padding: 16px 20px 0 20px; border-top: 1px solid #33312A; margin: 0 8px">
+      <div style="font-weight: 600; color: #FFFFFF">Jordy Rojas</div>
+      <div style="font-size: 11px; color: #9B9683; margin-top: 2px">Administrador</div>
+    </div>
+  </nav>
+
+  <div style="flex-grow: 1; display: flex; flex-direction: column; min-width: 0">
+
+    <header style="height: 62px; flex-shrink: 0; box-sizing: border-box; padding: 0 22px; border-bottom: 1px solid #E3DED1; background: #FFFFFF; display: flex; align-items: center; gap: 14px">
+      <h1 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.01em">Usuarios y permisos</h1>
+      <div style="flex-grow: 1"></div>
+      <button type="button" style="height: 36px; padding: 0 18px; border: 1px solid #14453C; background: #14453C; color: #FFFFFF; border-radius: 5px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Invitar usuario</button>
+    </header>
+
+    <div style="flex-grow: 1; min-height: 0; box-sizing: border-box; padding: 18px 22px; display: flex; flex-direction: column; gap: 14px">
+
+      <section aria-label="Usuarios" style="background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; overflow: hidden">
+        <table style="width: 100%; border-collapse: collapse; font-size: 12.5px">
+          <thead>
+            <tr style="background: #F1EEE5; color: #4F4C42">
+              <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 16px; width: 190px; border-bottom: 1px solid #E3DED1">Nombre</th>
+              <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 8px; border-bottom: 1px solid #E3DED1">Correo</th>
+              <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 8px; width: 150px; border-bottom: 1px solid #E3DED1">Rol</th>
+              <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 8px; width: 180px; border-bottom: 1px solid #E3DED1">Sucursal</th>
+              <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 8px; width: 130px; border-bottom: 1px solid #E3DED1">Último acceso</th>
+              <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 16px 10px 8px; width: 92px; border-bottom: 1px solid #E3DED1">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 10px 16px; font-weight: 500; border-bottom: 1px solid #F0EDE3">Jordy Rojas</td>
+              <td style="padding: 10px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">jordy.rojas@morella.pe</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3">Administrador</td>
+              <td style="padding: 10px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">Todas</td>
+              <td style="padding: 10px 8px; color: #4F4C42; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">Hoy 08:12</td>
+              <td style="padding: 10px 16px 10px 8px; border-bottom: 1px solid #F0EDE3"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #14453C; background: #E2EDE7; border-radius: 3px; padding: 3px 7px">Activo</span></td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 16px; font-weight: 500; border-bottom: 1px solid #F0EDE3">Rosa Medina</td>
+              <td style="padding: 10px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">rosa.medina@morella.pe</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3">Gerente</td>
+              <td style="padding: 10px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">M · Distribuidora Morella</td>
+              <td style="padding: 10px 8px; color: #4F4C42; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">Hoy 07:55</td>
+              <td style="padding: 10px 16px 10px 8px; border-bottom: 1px solid #F0EDE3"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #14453C; background: #E2EDE7; border-radius: 3px; padding: 3px 7px">Activo</span></td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 16px; font-weight: 500; border-bottom: 1px solid #F0EDE3">Angela Ruiz</td>
+              <td style="padding: 10px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">angela.ruiz@morella.pe</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3">Vendedor</td>
+              <td style="padding: 10px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">M · Distribuidora Morella</td>
+              <td style="padding: 10px 8px; color: #4F4C42; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">Hoy 09:04</td>
+              <td style="padding: 10px 16px 10px 8px; border-bottom: 1px solid #F0EDE3"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #14453C; background: #E2EDE7; border-radius: 3px; padding: 3px 7px">Activo</span></td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 16px; font-weight: 500; border-bottom: 1px solid #F0EDE3">Jamile Delgado</td>
+              <td style="padding: 10px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">jamile.delgado@morella.pe</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3">Almacén</td>
+              <td style="padding: 10px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">M · Distribuidora Morella</td>
+              <td style="padding: 10px 8px; color: #4F4C42; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">Ayer 18:40</td>
+              <td style="padding: 10px 16px 10px 8px; border-bottom: 1px solid #F0EDE3"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #14453C; background: #E2EDE7; border-radius: 3px; padding: 3px 7px">Activo</span></td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 16px; font-weight: 500; color: #8A8574">Luis Paredes</td>
+              <td style="padding: 10px 8px; color: #8A8574">luis.paredes@morella.pe</td>
+              <td style="padding: 10px 8px; color: #8A8574">Solo lectura</td>
+              <td style="padding: 10px 8px; color: #8A8574">M · Distribuidora Morella</td>
+              <td style="padding: 10px 8px; color: #8A8574; font-family: 'IBM Plex Mono', monospace">12/06/2026</td>
+              <td style="padding: 10px 16px 10px 8px"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #5C5A52; background: #EDEAE0; border-radius: 3px; padding: 3px 7px">Inactivo</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section aria-label="Matriz de permisos" style="flex-grow: 1; min-height: 0; background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; overflow: hidden">
+        <div style="padding: 14px 16px 12px 16px; display: flex; align-items: baseline; gap: 12px">
+          <div style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Matriz de permisos</div>
+          <span style="font-size: 11.5px; color: #6B6759">Cada casilla es una fila en la tabla de permisos. Cambiarla no requiere desplegar la aplicación.</span>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 12.5px">
+          <thead>
+            <tr style="background: #F1EEE5; color: #4F4C42">
+              <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 16px; width: 200px; border-top: 1px solid #E3DED1; border-bottom: 1px solid #E3DED1">Recurso y acción</th>
+              <th scope="col" style="text-align: center; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 8px; border-top: 1px solid #E3DED1; border-bottom: 1px solid #E3DED1">Admin</th>
+              <th scope="col" style="text-align: center; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 8px; border-top: 1px solid #E3DED1; border-bottom: 1px solid #E3DED1">Gerente</th>
+              <th scope="col" style="text-align: center; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 8px; border-top: 1px solid #E3DED1; border-bottom: 1px solid #E3DED1">Vendedor</th>
+              <th scope="col" style="text-align: center; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 8px; border-top: 1px solid #E3DED1; border-bottom: 1px solid #E3DED1">Almacén</th>
+              <th scope="col" style="text-align: center; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 16px 10px 8px; border-top: 1px solid #E3DED1; border-bottom: 1px solid #E3DED1">Lectura</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" style="text-align: left; font-weight: 500; padding: 9px 16px; border-bottom: 1px solid #F0EDE3">Ventas · crear</th>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 8px; color: #B8B2A0; border-bottom: 1px solid #F0EDE3">—</td>
+              <td style="text-align: center; padding: 9px 16px 9px 8px; color: #B8B2A0; border-bottom: 1px solid #F0EDE3">—</td>
+            </tr>
+            <tr>
+              <th scope="row" style="text-align: left; font-weight: 500; padding: 9px 16px; border-bottom: 1px solid #F0EDE3">Ventas · confirmar</th>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 8px; color: #B8B2A0; border-bottom: 1px solid #F0EDE3">—</td>
+              <td style="text-align: center; padding: 9px 16px 9px 8px; color: #B8B2A0; border-bottom: 1px solid #F0EDE3">—</td>
+            </tr>
+            <tr>
+              <th scope="row" style="text-align: left; font-weight: 500; padding: 9px 16px; border-bottom: 1px solid #F0EDE3">Ventas · anular</th>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 8px; color: #B8B2A0; border-bottom: 1px solid #F0EDE3">—</td>
+              <td style="text-align: center; padding: 9px 8px; color: #B8B2A0; border-bottom: 1px solid #F0EDE3">—</td>
+              <td style="text-align: center; padding: 9px 16px 9px 8px; color: #B8B2A0; border-bottom: 1px solid #F0EDE3">—</td>
+            </tr>
+            <tr>
+              <th scope="row" style="text-align: left; font-weight: 500; padding: 9px 16px; border-bottom: 1px solid #F0EDE3">Compras · confirmar</th>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 8px; color: #B8B2A0; border-bottom: 1px solid #F0EDE3">—</td>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 16px 9px 8px; color: #B8B2A0; border-bottom: 1px solid #F0EDE3">—</td>
+            </tr>
+            <tr>
+              <th scope="row" style="text-align: left; font-weight: 500; padding: 9px 16px; border-bottom: 1px solid #F0EDE3">Catálogo · editar</th>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 8px; color: #B8B2A0; border-bottom: 1px solid #F0EDE3">—</td>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 16px 9px 8px; color: #B8B2A0; border-bottom: 1px solid #F0EDE3">—</td>
+            </tr>
+            <tr>
+              <th scope="row" style="text-align: left; font-weight: 500; padding: 9px 16px; border-bottom: 1px solid #F0EDE3">Informes · ver costes</th>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 8px; border-bottom: 1px solid #F0EDE3"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 8px; color: #B8B2A0; border-bottom: 1px solid #F0EDE3">—</td>
+              <td style="text-align: center; padding: 9px 8px; color: #B8B2A0; border-bottom: 1px solid #F0EDE3">—</td>
+              <td style="text-align: center; padding: 9px 16px 9px 8px; color: #B8B2A0; border-bottom: 1px solid #F0EDE3">—</td>
+            </tr>
+            <tr>
+              <th scope="row" style="text-align: left; font-weight: 500; padding: 9px 16px">Usuarios · gestionar</th>
+              <td style="text-align: center; padding: 9px 8px"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #14453C"></span><span style="position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0)">Sí</span></td>
+              <td style="text-align: center; padding: 9px 8px; color: #B8B2A0">—</td>
+              <td style="text-align: center; padding: 9px 8px; color: #B8B2A0">—</td>
+              <td style="text-align: center; padding: 9px 8px; color: #B8B2A0">—</td>
+              <td style="text-align: center; padding: 9px 16px 9px 8px; color: #B8B2A0">—</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="padding: 11px 16px; background: #FAF8F3; border-top: 1px solid #E3DED1; font-size: 11.5px; color: #4F4C42">Un cambio de rol se aplica cuando el usuario renueva su sesión. Para efecto inmediato hay que cerrarle la sesión.</div>
+      </section>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

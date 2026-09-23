@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Documentos y envío a SUNAT</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap">
+<style>
+body{margin:0}
+a{color:#14453C}a:hover{color:#0C2E28}
+</style>
+</helmet>
+<div style="width: 1440px; height: 900px; box-sizing: border-box; display: flex; font-family: 'IBM Plex Sans', system-ui, sans-serif; background: #F6F4EF; color: #14130F; font-size: 13px">
+
+  <nav aria-label="Principal" style="width: 216px; flex-shrink: 0; background: #1B1A15; color: #E8E3D6; display: flex; flex-direction: column; box-sizing: border-box; padding: 20px 0">
+    <div style="padding: 0 20px 22px 20px">
+      <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; line-height: 1; color: #FFFFFF">Morella</div>
+      <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #9B9683; margin-top: 6px">Ventas y almacén</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px; padding: 0 12px">
+      <a href="Main.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Ventas</a>
+      <a href="Compra.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Compras</a>
+      <a href="Documentos.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; background: #33312A; color: #FFFFFF; text-decoration: none; font-weight: 600">Documentos</a>
+      <a href="Producto.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Catálogo</a>
+      <a href="Cliente.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Clientes</a>
+      <a href="Usuarios.dc.html" style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 5px; color: #CFCABA; text-decoration: none">Usuarios</a>
+    </div>
+    <div style="flex-grow: 1"></div>
+    <div style="padding: 16px 20px 0 20px; border-top: 1px solid #33312A; margin: 0 8px">
+      <div style="font-weight: 600; color: #FFFFFF">Rosa Medina</div>
+      <div style="font-size: 11px; color: #9B9683; margin-top: 2px">Gerente · Sucursal M</div>
+    </div>
+  </nav>
+
+  <div style="flex-grow: 1; display: flex; flex-direction: column; min-width: 0">
+
+    <header style="height: 62px; flex-shrink: 0; box-sizing: border-box; padding: 0 22px; border-bottom: 1px solid #E3DED1; background: #FFFFFF; display: flex; align-items: center; gap: 14px">
+      <h1 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.01em">Documentos</h1>
+      <div style="flex-grow: 1"></div>
+      <button type="button" style="height: 36px; padding: 0 16px; border: 1px solid #D3CDBC; background: #FFFFFF; color: #14130F; border-radius: 5px; font-family: inherit; font-size: 13px; cursor: pointer">Exportar</button>
+      <a href="Main.dc.html" style="display: flex; align-items: center; height: 36px; padding: 0 18px; border: 1px solid #14453C; background: #14453C; color: #FFFFFF; border-radius: 5px; font-size: 13px; font-weight: 600; text-decoration: none">Nueva venta</a>
+    </header>
+
+    <div style="flex-grow: 1; min-height: 0; box-sizing: border-box; padding: 18px 22px; display: flex; flex-direction: column; gap: 14px">
+
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+        <div style="background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; padding: 13px 15px">
+          <div style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Aceptados hoy</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600; margin-top: 5px">38</div>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #DCC79A; border-radius: 7px; padding: 13px 15px">
+          <div style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B4700; font-weight: 600">Pendientes de envío</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600; margin-top: 5px; color: #6B4700">3</div>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E0B5A0; border-radius: 7px; padding: 13px 15px">
+          <div style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #8A350C; font-weight: 600">Rechazados</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600; margin-top: 5px; color: #8A350C">1</div>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; padding: 13px 15px">
+          <div style="font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6759; font-weight: 600">Plazo legal de envío</div>
+          <div style="font-size: 13px; margin-top: 8px; color: #4F4C42; line-height: 1.4">3 días calendario desde la emisión</div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; align-items: center">
+        <input type="text" aria-label="Buscar documento o cliente" placeholder="Número, cliente o documento de identidad…" style="height: 36px; box-sizing: border-box; flex-grow: 1; border: 1px solid #D3CDBC; border-radius: 5px; background: #FFFFFF; font-family: inherit; font-size: 13px; padding: 0 12px">
+        <select aria-label="Tipo de documento" style="height: 36px; border: 1px solid #D3CDBC; border-radius: 5px; background: #FFFFFF; font-family: inherit; font-size: 13px; padding: 0 10px; color: #14130F"><option>Todos los tipos</option></select>
+        <select aria-label="Estado" style="height: 36px; border: 1px solid #D3CDBC; border-radius: 5px; background: #FFFFFF; font-family: inherit; font-size: 13px; padding: 0 10px; color: #14130F"><option>Todos los estados</option></select>
+        <input type="text" aria-label="Rango de fechas" value="01/08/2026 – 03/08/2026" style="height: 36px; box-sizing: border-box; width: 190px; border: 1px solid #D3CDBC; border-radius: 5px; background: #FFFFFF; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; padding: 0 12px">
+      </div>
+
+      <section aria-label="Lista de documentos" style="flex-grow: 1; min-height: 0; background: #FFFFFF; border: 1px solid #E3DED1; border-radius: 7px; overflow: hidden">
+        <table style="width: 100%; border-collapse: collapse; font-size: 12.5px">
+          <thead>
+            <tr style="background: #F1EEE5; color: #4F4C42">
+              <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 12px; width: 52px; border-bottom: 1px solid #E3DED1">Tipo</th>
+              <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 8px; width: 132px; border-bottom: 1px solid #E3DED1">Número</th>
+              <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 8px; width: 90px; border-bottom: 1px solid #E3DED1">Emisión</th>
+              <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 8px; border-bottom: 1px solid #E3DED1">Cliente o proveedor</th>
+              <th scope="col" style="text-align: right; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 8px; width: 120px; border-bottom: 1px solid #E3DED1">Total</th>
+              <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 8px; width: 104px; border-bottom: 1px solid #E3DED1">Estado</th>
+              <th scope="col" style="text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 12px 10px 8px; width: 216px; border-bottom: 1px solid #E3DED1">SUNAT</th>
+            </tr>
+          </thead>
+          <tbody style="font-variant-numeric: tabular-nums">
+            <tr>
+              <td style="padding: 10px 12px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">FT</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; font-weight: 500; border-bottom: 1px solid #F0EDE3">F001-00000412</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">03/08/2026</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3">COMERCIAL LOS ANDES S.A.C.</td>
+              <td style="padding: 10px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">S/ 6,802.65</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #14453C; background: #E2EDE7; border-radius: 3px; padding: 3px 7px">Aceptado</span></td>
+              <td style="padding: 10px 12px 10px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">CDR conforme · 12:41</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 12px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">BV</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; font-weight: 500; border-bottom: 1px solid #F0EDE3">B001-00001180</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">03/08/2026</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3">AYDEE QUICO HANCCO <span style="color: #6B6759; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px">· DNI 44998228</span></td>
+              <td style="padding: 10px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">S/ 148.50</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #1B4F82; background: #E1EAF3; border-radius: 3px; padding: 3px 7px">Emitido</span></td>
+              <td style="padding: 10px 12px 10px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">Entra en el resumen diario</td>
+            </tr>
+            <tr style="background: #FDF9F2">
+              <td style="padding: 10px 12px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">FT</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; font-weight: 500; border-bottom: 1px solid #F0EDE3">F001-00000411</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">02/08/2026</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3">DISTRIBUIDORA SAN MIGUEL E.I.R.L.</td>
+              <td style="padding: 10px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">S/ 12,430.00</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #6B4700; background: #F7EEDC; border-radius: 3px; padding: 3px 7px">Pendiente</span></td>
+              <td style="padding: 10px 12px 10px 8px; color: #6B4700; border-bottom: 1px solid #F0EDE3">En cola · vence mañana</td>
+            </tr>
+            <tr style="background: #FCF3EE">
+              <td style="padding: 10px 12px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">FT</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; font-weight: 500; border-bottom: 1px solid #F0EDE3">F001-00000410</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">02/08/2026</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3">HOTELERA DEL SUR S.A.</td>
+              <td style="padding: 10px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">S/ 3,918.00</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #8A350C; background: #F7E4DA; border-radius: 3px; padding: 3px 7px">Rechazado</span></td>
+              <td style="padding: 10px 12px 10px 8px; color: #8A350C; border-bottom: 1px solid #F0EDE3">2335 · RUC no habido. Corregir y reemitir</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 12px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">NC</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; font-weight: 500; border-bottom: 1px solid #F0EDE3">F001-00000009</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">01/08/2026</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3">COMERCIAL LOS ANDES S.A.C. <span style="color: #6B6759; font-size: 11.5px">· ref. F001-00000398 · motivo 06</span></td>
+              <td style="padding: 10px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">S/ −880.00</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #14453C; background: #E2EDE7; border-radius: 3px; padding: 3px 7px">Aceptado</span></td>
+              <td style="padding: 10px 12px 10px 8px; color: #4F4C42; border-bottom: 1px solid #F0EDE3">CDR conforme</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 12px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">NS</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; font-weight: 500; border-bottom: 1px solid #F0EDE3">000-0000164</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">03/08/2026</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3">AYDEE QUICO HANCCO</td>
+              <td style="padding: 10px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">S/ 6,802.65</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #1B4F82; background: #E1EAF3; border-radius: 3px; padding: 3px 7px">Emitido</span></td>
+              <td style="padding: 10px 12px 10px 8px; color: #8A8574; border-bottom: 1px solid #F0EDE3">No es comprobante fiscal</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 12px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">CI</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; font-weight: 500; border-bottom: 1px solid #F0EDE3">001-0000070</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; color: #4F4C42; border-bottom: 1px solid #F0EDE3">05/01/2026</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3">NINGBO YUN RUI TRADING CO. LTD <span style="color: #6B6759; font-size: 11.5px">· compra</span></td>
+              <td style="padding: 10px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; border-bottom: 1px solid #F0EDE3">US$ 95,416.12</td>
+              <td style="padding: 10px 8px; border-bottom: 1px solid #F0EDE3"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #1B4F82; background: #E1EAF3; border-radius: 3px; padding: 3px 7px">Emitido</span></td>
+              <td style="padding: 10px 12px 10px 8px; color: #8A8574; border-bottom: 1px solid #F0EDE3">No es comprobante fiscal</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 12px; font-family: 'IBM Plex Mono', monospace; color: #8A8574">FT</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; color: #8A8574; text-decoration: line-through">F001-00000398</td>
+              <td style="padding: 10px 8px; font-family: 'IBM Plex Mono', monospace; color: #8A8574">28/07/2026</td>
+              <td style="padding: 10px 8px; color: #8A8574">COMERCIAL LOS ANDES S.A.C.</td>
+              <td style="padding: 10px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #8A8574">S/ 880.00</td>
+              <td style="padding: 10px 8px"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5C5A52; background: #EDEAE0; border-radius: 3px; padding: 3px 7px">Anulado</span></td>
+              <td style="padding: 10px 12px 10px 8px; color: #8A8574">Nota de crédito F001-00000009</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
