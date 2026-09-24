@@ -25,7 +25,10 @@ class StatusPill extends StatelessWidget {
       case 'EMITIDO':
         return const StatusPill(label: 'Emitido', tone: AppStatusTone.info);
       case 'ENVIANDO':
-        return const StatusPill(label: 'Pendiente de envío', tone: AppStatusTone.warn);
+        return const StatusPill(
+          label: 'Pendiente de envío',
+          tone: AppStatusTone.warn,
+        );
       case 'ACEPTADO':
         return const StatusPill(label: 'Aceptado', tone: AppStatusTone.primary);
       case 'OBSERVADO':

@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../state/perfil_providers.dart';
 import '../../../state/session_providers.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/app_tokens.dart';
@@ -12,14 +14,11 @@ import '../../widgets/app_field.dart';
 /// Ruta `/acceso`. Sin `AppShell`: panel de marca fijo de 560 px a la
 /// izquierda, formulario de 388 px centrado a la derecha.
 ///
-/// Tras `signInWithPassword`, resuelve el rol del perfil y entrega la
-/// ruta de destino a [onAuthenticated]; quien construye el árbol de
-/// navegación decide cómo llegar hasta ahí (igual que `AppShell` no
-/// asume `go_router`, ver `onNavigate`).
+/// Tras `signInWithPassword`, guarda el perfil en
+/// [perfilActualProvider] y navega según el rol (ver `rutaSegunRol`
+/// en `state/perfil_providers.dart`).
 class AccesoScreen extends ConsumerStatefulWidget {
-  const AccesoScreen({super.key, required this.onAuthenticated});
-
-  final void Function(BuildContext context, String route) onAuthenticated;
+  const AccesoScreen({super.key});
 
   @override
   ConsumerState<AccesoScreen> createState() => _AccesoScreenState();
@@ -43,18 +42,23 @@ class _AccesoScreenState extends ConsumerState<AccesoScreen> {
   Future<void> _recuperarContrasena() async {
     final email = _emailController.text.trim();
     if (email.isEmpty) {
-      setState(() => _error = 'Escribe tu correo para recuperar la contraseña.');
+      setState(
+        () => _error = 'Escribe tu correo para recuperar la contraseña.',
+      );
       return;
     }
     try {
       await Supabase.instance.client.auth.resetPasswordForEmail(email);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Si el correo existe, te enviamos un enlace.')),
+        const SnackBar(
+          content: Text('Si el correo existe, te enviamos un enlace.'),
+        ),
       );
     } on AuthException catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
     }
   }
 
@@ -85,24 +89,46 @@ class _AccesoScreenState extends ConsumerState<AccesoScreen> {
 
       final perfil = await Supabase.instance.client
           .from('profiles')
-          .select('rol:roles(codigo)')
+          .select(
+            'rol_id, nombre, rol:roles(codigo, nombre), sucursal:sucursales(nombre)',
+          )
           .eq('id', userId)
           .single();
-      final rolCodigo = (perfil['rol'] as Map)['codigo'] as String;
+      final rol = perfil['rol'] as Map;
+      final rolCodigo = rol['codigo'] as String;
+      final sucursal = perfil['sucursal'] as Map?;
 
-      final opcion = opciones.firstWhere((o) => o.almacenId == almacenId);
-      ref.read(sesionProvider.notifier).seleccionar(
-            SesionSeleccion(sucursalId: opcion.sucursalId, almacenId: opcion.almacenId),
-          );
-
-      final ruta = switch (rolCodigo) {
-        'vendedor' => '/ventas/nueva',
-        'almacen' => '/compras',
-        _ => '/documentos',
+      final permisosRows = await Supabase.instance.client
+          .from('permisos')
+          .select('recurso, accion')
+          .eq('rol_id', perfil['rol_id'] as String);
+      final permisos = {
+        for (final p in permisosRows) '${p['recurso']}.${p['accion']}',
       };
 
+      final opcion = opciones.firstWhere((o) => o.almacenId == almacenId);
+      ref
+          .read(sesionProvider.notifier)
+          .seleccionar(
+            SesionSeleccion(
+              sucursalId: opcion.sucursalId,
+              almacenId: opcion.almacenId,
+            ),
+          );
+      ref
+          .read(perfilActualProvider.notifier)
+          .establecer(
+            PerfilActual(
+              nombre: perfil['nombre'] as String,
+              rolCodigo: rolCodigo,
+              rolLabel:
+                  '${rol['nombre']} · ${sucursal?['nombre'] ?? 'Sin sucursal'}',
+              permisos: permisos,
+            ),
+          );
+
       if (!mounted) return;
-      widget.onAuthenticated(context, ruta);
+      context.go(rutaSegunRol(rolCodigo));
     } on AuthException catch (e) {
       setState(() => _error = e.message);
     } catch (_) {
@@ -134,7 +160,8 @@ class _AccesoScreenState extends ConsumerState<AccesoScreen> {
                       passwordController: _passwordController,
                       opciones: opciones,
                       almacenId: _almacenId,
-                      onAlmacenChanged: (value) => setState(() => _almacenId = value),
+                      onAlmacenChanged: (value) =>
+                          setState(() => _almacenId = value),
                       error: _error,
                       submitting: _submitting,
                       onSubmit: () => _entrar(opciones),
@@ -142,7 +169,11 @@ class _AccesoScreenState extends ConsumerState<AccesoScreen> {
                     ),
                     loading: () => const Padding(
                       padding: EdgeInsets.symmetric(vertical: 120),
-                      child: Center(child: CircularProgressIndicator(color: AppColor.primary)),
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: AppColor.primary,
+                        ),
+                      ),
                     ),
                     error: (error, stackTrace) => Text(
                       'No se pudo cargar sucursales y almacenes. Verifica tu conexión.',
@@ -190,7 +221,11 @@ class _FormularioAcceso extends StatelessWidget {
       children: [
         const Text(
           'Entrar',
-          style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600, letterSpacing: -0.39),
+          style: TextStyle(
+            fontSize: 26,
+            fontWeight: FontWeight.w600,
+            letterSpacing: -0.39,
+          ),
         ),
         const SizedBox(height: 6),
         const Text(
@@ -222,14 +257,20 @@ class _FormularioAcceso extends StatelessWidget {
             style: AppField.textStyleFor(context, dense: false),
             items: [
               for (final opcion in opciones)
-                DropdownMenuItem(value: opcion.almacenId, child: Text(opcion.label)),
+                DropdownMenuItem(
+                  value: opcion.almacenId,
+                  child: Text(opcion.label),
+                ),
             ],
             onChanged: onAlmacenChanged,
           ),
         ),
         if (error != null) ...[
           const SizedBox(height: 16),
-          Text(error!, style: const TextStyle(fontSize: 12.5, color: AppColor.danger)),
+          Text(
+            error!,
+            style: const TextStyle(fontSize: 12.5, color: AppColor.danger),
+          ),
         ],
         const SizedBox(height: 6),
         SizedBox(
@@ -242,13 +283,19 @@ class _FormularioAcceso extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppRadius.authControl),
               ),
-              textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+              textStyle: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             child: submitting
                 ? const SizedBox(
                     width: 18,
                     height: 18,
-                    child: CircularProgressIndicator(strokeWidth: 2, color: AppColor.primaryOn),
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: AppColor.primaryOn,
+                    ),
                   )
                 : const Text('Entrar'),
           ),
@@ -291,7 +338,11 @@ class _FormularioAcceso extends StatelessWidget {
                 child: Text(
                   'Tu rol decide qué ves y qué puedes cambiar. Si necesitas acceso a '
                   'compras o a costes, pídelo: no se activa desde aquí.',
-                  style: TextStyle(fontSize: 11.5, color: AppColor.inkFaint, height: 1.55),
+                  style: TextStyle(
+                    fontSize: 11.5,
+                    color: AppColor.inkFaint,
+                    height: 1.55,
+                  ),
                 ),
               ),
             ],
@@ -314,16 +365,26 @@ class _BrandPanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Morella', style: AppTheme.serif(size: 40, color: AppColor.railTextStrong)),
+          Text(
+            'Morella',
+            style: AppTheme.serif(size: 40, color: AppColor.railTextStrong),
+          ),
           const SizedBox(height: 10),
           const Text(
             'VENTAS Y ALMACÉN',
-            style: TextStyle(fontSize: 11, letterSpacing: 1.54, color: AppColor.railTextMuted),
+            style: TextStyle(
+              fontSize: 11,
+              letterSpacing: 1.54,
+              color: AppColor.railTextMuted,
+            ),
           ),
           const Spacer(),
           Text(
             'Cada documento deja rastro. El stock es un libro, no una casilla.',
-            style: AppTheme.serif(size: 34, color: AppColor.railTextStrong).copyWith(height: 1.32),
+            style: AppTheme.serif(
+              size: 34,
+              color: AppColor.railTextStrong,
+            ).copyWith(height: 1.32),
           ),
           const SizedBox(height: 36),
           const _BrandFeature(
@@ -362,7 +423,11 @@ class _BrandFeature extends StatelessWidget {
         Expanded(
           child: Text(
             text,
-            style: const TextStyle(fontSize: 13, color: AppColor.railText, height: 1.55),
+            style: const TextStyle(
+              fontSize: 13,
+              color: AppColor.railText,
+              height: 1.55,
+            ),
           ),
         ),
       ],

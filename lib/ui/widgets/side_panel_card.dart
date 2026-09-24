@@ -26,8 +26,12 @@ class SidePanelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final background = tone == SidePanelTone.warn ? AppColor.warnBg : AppColor.surface;
-    final border = tone == SidePanelTone.warn ? AppColor.warnBorder : AppColor.line;
+    final background = tone == SidePanelTone.warn
+        ? AppColor.warnBg
+        : AppColor.surface;
+    final border = tone == SidePanelTone.warn
+        ? AppColor.warnBorder
+        : AppColor.line;
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -36,7 +40,10 @@ class SidePanelCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppRadius.card),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: AppSpace.md),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: AppSpace.md,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,

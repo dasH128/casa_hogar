@@ -27,13 +27,13 @@ final almacenOptionsProvider = FutureProvider<List<AlmacenOption>>((ref) async {
       .select('id, nombre, sucursal:sucursales(id, codigo, nombre)')
       .eq('activo', true)
       .order('nombre');
-
   return [
     for (final row in rows)
       AlmacenOption(
         almacenId: row['id'] as String,
         sucursalId: (row['sucursal'] as Map)['id'] as String,
-        label: '${(row['sucursal'] as Map)['codigo']} · '
+        label:
+            '${(row['sucursal'] as Map)['codigo']} · '
             '${(row['sucursal'] as Map)['nombre']} — ${row['nombre']}',
       ),
   ];
@@ -57,4 +57,6 @@ class SesionNotifier extends Notifier<SesionSeleccion?> {
 }
 
 /// Null hasta que el usuario elige sucursal y almacén en /acceso.
-final sesionProvider = NotifierProvider<SesionNotifier, SesionSeleccion?>(SesionNotifier.new);
+final sesionProvider = NotifierProvider<SesionNotifier, SesionSeleccion?>(
+  SesionNotifier.new,
+);

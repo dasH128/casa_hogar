@@ -29,6 +29,7 @@ class DataTableShell extends StatelessWidget {
     required this.cellBuilder,
     this.activeRowIndex,
     this.compact = false,
+    this.trailingRow,
     this.footer,
   });
 
@@ -44,11 +45,19 @@ class DataTableShell extends StatelessWidget {
   /// Filas de 30 px (grilla de compras) en lugar de 36 px.
   final bool compact;
 
+  /// Fila libre añadida tras la última fila de datos, dentro del mismo
+  /// scroll (p. ej. el buscador de producto de la grilla de venta). A
+  /// diferencia de las filas de [cellBuilder], no sigue el grid de
+  /// columnas: el contenido decide su propio layout.
+  final Widget? trailingRow;
+
   final Widget? footer;
 
   @override
   Widget build(BuildContext context) {
-    final rowHeight = compact ? AppSize.compactRowHeight : AppSize.tableRowHeight;
+    final rowHeight = compact
+        ? AppSize.compactRowHeight
+        : AppSize.tableRowHeight;
     final columnWidths = <int, TableColumnWidth>{
       for (var i = 0; i < columns.length; i++) i: columns[i].width,
     };
@@ -81,31 +90,47 @@ class DataTableShell extends StatelessWidget {
             ),
             Expanded(
               child: SingleChildScrollView(
-                child: Table(
-                  columnWidths: columnWidths,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    for (var row = 0; row < rowCount; row++)
-                      TableRow(
-                        decoration: BoxDecoration(
-                          color: row == activeRowIndex ? AppColor.rowActive : null,
-                          border: const Border(bottom: BorderSide(color: AppColor.lineSoft)),
-                        ),
-                        children: [
-                          for (var column = 0; column < columns.length; column++)
-                            SizedBox(
-                              height: rowHeight,
-                              child: Align(
-                                alignment: columns[column].numeric
-                                    ? Alignment.centerRight
-                                    : Alignment.centerLeft,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: AppSpace.sm),
-                                  child: cellBuilder(context, row, column),
-                                ),
+                    Table(
+                      columnWidths: columnWidths,
+                      children: [
+                        for (var row = 0; row < rowCount; row++)
+                          TableRow(
+                            decoration: BoxDecoration(
+                              color: row == activeRowIndex
+                                  ? AppColor.rowActive
+                                  : null,
+                              border: const Border(
+                                bottom: BorderSide(color: AppColor.lineSoft),
                               ),
                             ),
-                        ],
-                      ),
+                            children: [
+                              for (
+                                var column = 0;
+                                column < columns.length;
+                                column++
+                              )
+                                SizedBox(
+                                  height: rowHeight,
+                                  child: Align(
+                                    alignment: columns[column].numeric
+                                        ? Alignment.centerRight
+                                        : Alignment.centerLeft,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: AppSpace.sm,
+                                      ),
+                                      child: cellBuilder(context, row, column),
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                      ],
+                    ),
+                    ?trailingRow,
                   ],
                 ),
               ),
@@ -117,7 +142,10 @@ class DataTableShell extends StatelessWidget {
                   border: Border(top: BorderSide(color: AppColor.line)),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: AppSpace.sm),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: AppSpace.sm,
+                  ),
                   child: footer,
                 ),
               ),

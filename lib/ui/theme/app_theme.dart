@@ -103,22 +103,21 @@ abstract final class AppTheme {
   }
 
   static OutlineInputBorder _fieldBorder(Color c) => OutlineInputBorder(
-        borderSide: BorderSide(color: c),
-        borderRadius: BorderRadius.circular(AppRadius.field),
-      );
+    borderSide: BorderSide(color: c),
+    borderRadius: BorderRadius.circular(AppRadius.field),
+  );
 
   /// Estilo obligatorio para importes, cantidades y códigos.
   static TextStyle mono({
     double size = 13,
     FontWeight weight = FontWeight.w400,
     Color color = AppColor.ink,
-  }) =>
-      GoogleFonts.ibmPlexMono(
-        fontSize: size,
-        fontWeight: weight,
-        color: color,
-        fontFeatures: AppType.tabular,
-      );
+  }) => GoogleFonts.ibmPlexMono(
+    fontSize: size,
+    fontWeight: weight,
+    color: color,
+    fontFeatures: AppType.tabular,
+  );
 
   /// Marca y titulares grandes.
   static TextStyle serif({double size = 26, Color color = AppColor.ink}) =>

@@ -54,7 +54,10 @@ class AppField extends StatelessWidget {
   /// Decoración compartida por el campo de texto por defecto y por
   /// cualquier [child] que quiera verse como un `AppField` (p. ej. un
   /// `DropdownButtonFormField`).
-  static InputDecoration decoration({bool dense = true, bool readOnly = false}) {
+  static InputDecoration decoration({
+    bool dense = true,
+    bool readOnly = false,
+  }) {
     final radius = dense ? AppRadius.field : AppRadius.authControl;
 
     if (dense) {
@@ -78,7 +81,10 @@ class AppField extends StatelessWidget {
       fillColor: readOnly ? AppColor.readonly : AppColor.surface,
       border: _border(borderColor, radius),
       enabledBorder: _border(borderColor, radius),
-      focusedBorder: _border(readOnly ? AppColor.line : AppColor.primary, radius),
+      focusedBorder: _border(
+        readOnly ? AppColor.line : AppColor.primary,
+        radius,
+      ),
       disabledBorder: _border(AppColor.line, radius),
     );
   }
@@ -92,12 +98,15 @@ class AppField extends StatelessWidget {
     final color = readOnly ? AppColor.inkMuted : AppColor.ink;
     if (monospace) return AppTheme.mono(size: dense ? 13 : 14, color: color);
     final base = Theme.of(context).textTheme.bodyMedium;
-    return dense ? base?.copyWith(color: color) : base?.copyWith(fontSize: 14, color: color);
+    return dense
+        ? base?.copyWith(color: color)
+        : base?.copyWith(fontSize: 14, color: color);
   }
 
   @override
   Widget build(BuildContext context) {
-    final field = child ??
+    final field =
+        child ??
         TextFormField(
           controller: controller,
           initialValue: controller == null ? initialValue : null,
@@ -107,7 +116,12 @@ class AppField extends StatelessWidget {
           onChanged: onChanged,
           keyboardType: keyboardType,
           textAlign: textAlign,
-          style: textStyleFor(context, dense: dense, monospace: monospace, readOnly: readOnly),
+          style: textStyleFor(
+            context,
+            dense: dense,
+            monospace: monospace,
+            readOnly: readOnly,
+          ),
           decoration: decoration(dense: dense, readOnly: readOnly),
         );
 
@@ -117,16 +131,23 @@ class AppField extends StatelessWidget {
       children: [
         FieldLabel(label),
         SizedBox(height: dense ? AppSpace.xs : 6),
-        SizedBox(height: heightFor(dense: dense), child: field),
+        SizedBox(
+          height: heightFor(dense: dense),
+          child: field,
+        ),
         if (note != null) ...[
           const SizedBox(height: 6),
-          Text(note!, style: const TextStyle(fontSize: 11, color: AppColor.inkFaint)),
+          Text(
+            note!,
+            style: const TextStyle(fontSize: 11, color: AppColor.inkFaint),
+          ),
         ],
       ],
     );
   }
 
-  static OutlineInputBorder _border(Color color, double radius) => OutlineInputBorder(
+  static OutlineInputBorder _border(Color color, double radius) =>
+      OutlineInputBorder(
         borderRadius: BorderRadius.circular(radius),
         borderSide: BorderSide(color: color),
       );

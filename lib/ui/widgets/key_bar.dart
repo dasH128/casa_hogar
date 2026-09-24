@@ -64,7 +64,10 @@ class _KeyBarEntry extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-            child: Text(item.keyLabel, style: AppTheme.mono(size: 10.5, color: AppColor.ink)),
+            child: Text(
+              item.keyLabel,
+              style: AppTheme.mono(size: 10.5, color: AppColor.ink),
+            ),
           ),
         ),
         const SizedBox(width: 6),

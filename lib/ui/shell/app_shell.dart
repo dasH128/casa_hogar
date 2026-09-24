@@ -5,21 +5,26 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import '../theme/app_tokens.dart';
 
-/// Un ítem del rail. [recurso] es el valor de `permisos.recurso`
-/// (ver `001_fundamentos.sql` / `006_rls.sql`) que decide si se
-/// muestra: ocultarlo es cosmética, la autorización real la aplica RLS.
+/// Un ítem del rail. [recurso]/[accion] son los valores de
+/// `permisos.recurso`/`permisos.accion` (ver `001_fundamentos.sql` /
+/// `006_rls.sql`) que deciden si se muestra: ocultarlo es cosmética,
+/// la autorización real la aplica RLS. [accion] es `'create'` en los
+/// que van directo a un formulario de alta (Ventas, Compras): un rol
+/// de solo lectura no debería ni ver la opción de crear uno.
 class AppShellNavItem {
   const AppShellNavItem({
     required this.label,
     required this.icon,
     required this.route,
     required this.recurso,
+    this.accion = 'read',
   });
 
   final String label;
   final IconData icon;
   final String route;
   final String recurso;
+  final String accion;
 }
 
 /// Rail de navegación por defecto, uno por artboard
@@ -33,12 +38,14 @@ const List<AppShellNavItem> appShellNavItems = [
     icon: Icons.format_list_bulleted_rounded,
     route: '/ventas/nueva',
     recurso: 'ventas',
+    accion: 'create',
   ),
   AppShellNavItem(
     label: 'Compras',
     icon: Icons.shopping_cart_outlined,
     route: '/compras',
     recurso: 'compras',
+    accion: 'create',
   ),
   AppShellNavItem(
     label: 'Documentos',
@@ -100,12 +107,14 @@ class AppShell extends StatelessWidget {
 
   /// Si es null, se muestran todos los ítems. Ocultar un ítem aquí es
   /// cortesía visual; RLS decide de verdad.
-  final bool Function(String recurso)? canView;
+  final bool Function(String recurso, String accion)? canView;
   final void Function(String route)? onNavigate;
 
   @override
   Widget build(BuildContext context) {
-    final visibleItems = items.where((item) => canView?.call(item.recurso) ?? true).toList();
+    final visibleItems = items
+        .where((item) => canView?.call(item.recurso, item.accion) ?? true)
+        .toList();
 
     return Scaffold(
       backgroundColor: AppColor.ground,
@@ -195,7 +204,10 @@ class _Rail extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(brand, style: AppTheme.serif(color: AppColor.railTextStrong)),
+                Text(
+                  brand,
+                  style: AppTheme.serif(color: AppColor.railTextStrong),
+                ),
                 const SizedBox(height: AppSpace.xs),
                 Text(
                   tagline.toUpperCase(),
@@ -218,7 +230,9 @@ class _Rail extends StatelessWidget {
                     child: _RailItem(
                       item: item,
                       active: item.route == activeRoute,
-                      onTap: onNavigate == null ? null : () => onNavigate!(item.route),
+                      onTap: onNavigate == null
+                          ? null
+                          : () => onNavigate!(item.route),
                     ),
                   ),
               ],
@@ -247,7 +261,10 @@ class _Rail extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       userRoleLabel,
-                      style: const TextStyle(fontSize: 11, color: AppColor.railTextMuted),
+                      style: const TextStyle(
+                        fontSize: 11,
+                        color: AppColor.railTextMuted,
+                      ),
                     ),
                   ],
                 ),

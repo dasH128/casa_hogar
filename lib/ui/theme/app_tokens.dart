@@ -21,7 +21,9 @@ abstract final class AppColor {
   static const railText = Color(0xFFCFCABA);
   static const railTextStrong = Color(0xFFFFFFFF);
   static const railTextMuted = Color(0xFF9B9683);
-  static const railTextFaint = Color(0xFF6E6A5C); // pie de página del panel de acceso
+  static const railTextFaint = Color(
+    0xFF6E6A5C,
+  ); // pie de página del panel de acceso
 
   // Texto
   static const ink = Color(0xFF14130F);
@@ -47,9 +49,13 @@ abstract final class AppColor {
   static const warnSoft = Color(0xFFF7EEDC);
   static const warnBorder = Color(0xFFDCC79A);
   static const warnBg = Color(0xFFF9F1E1);
+  static const warnIconStrong = Color(0xFF7A5200); // ícono del aviso de crédito
   static const danger = Color(0xFF8A350C); // rechazado, vencido
   static const dangerSoft = Color(0xFFF7E4DA);
   static const dangerBorder = Color(0xFFE0B5A0);
+  static const dangerBorderStrong = Color(
+    0xFFA8410F,
+  ); // botón "Solicitar autorización"
   static const dangerBg = Color(0xFFFCF3EE);
   static const neutral = Color(0xFF5C5A52); // anulado, inactivo
   static const neutralSoft = Color(0xFFEDEAE0);
@@ -61,6 +67,8 @@ abstract final class AppSpace {
   static const md = 14.0; // separación entre tarjetas
   static const lg = 18.0; // padding vertical del área de contenido
   static const xl = 22.0; // padding horizontal del área de contenido
+  static const cardPadding =
+      16.0; // interior de una tarjeta (cabecera, totales)
 }
 
 abstract final class AppRadius {
@@ -80,11 +88,17 @@ abstract final class AppSize {
   static const buttonHeight = 36.0;
   static const authFieldHeight = 44.0; // formularios sin densidad
   static const authButtonHeight = 46.0;
-  static const authPanelWidth = 560.0; // panel izquierdo de la pantalla de acceso
+  static const authPanelWidth =
+      560.0; // panel izquierdo de la pantalla de acceso
   static const authFormWidth = 388.0; // formulario de acceso, centrado
   static const asidePanelWidth = 296.0;
   static const tableRowHeight = 36.0;
   static const compactRowHeight = 30.0; // grilla de compras
+  static const lineSearchFieldHeight =
+      32.0; // buscador de producto, última fila de la grilla
+  static const warningIconSize = 16.0; // aviso de crédito
+  static const stockBarHeight =
+      6.0; // barra de disponibilidad del panel de stock
 }
 
 /// Tipografía. Requiere el paquete google_fonts.

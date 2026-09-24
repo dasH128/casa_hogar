@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'config/supabase_config.dart';
-import 'ui/screens/auth/acceso_screen.dart';
+import 'routing/app_router.dart';
 import 'ui/screens/supabase_not_configured_screen.dart';
 import 'ui/theme/app_theme.dart';
 
@@ -17,21 +17,19 @@ class MorellaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    if (!SupabaseConfig.isConfigured) {
+      return const MaterialApp(
+        title: 'Morella',
+        debugShowCheckedModeBanner: false,
+        home: SupabaseNotConfiguredScreen(),
+      );
+    }
+
+    return MaterialApp.router(
       title: 'Morella',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.build(),
-      home: SupabaseConfig.isConfigured
-          ? AccesoScreen(onAuthenticated: _handleAuthenticated)
-          : const SupabaseNotConfiguredScreen(),
-    );
-  }
-
-  // go_router llega con la pantalla de destino (screen 2 en adelante);
-  // por ahora solo confirmamos a qué ruta se dirigiría tras autenticar.
-  static void _handleAuthenticated(BuildContext context, String route) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Sesión iniciada. Redirigiría a $route.')),
+      routerConfig: appRouter,
     );
   }
 }
