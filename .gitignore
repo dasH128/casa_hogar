@@ -46,3 +46,11 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# FVM Version Cache
+.fvm/
+
+# Credenciales locales (ver .env.example)
+.env
+.env.*
+!.env.example

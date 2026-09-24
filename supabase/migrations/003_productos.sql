@@ -30,6 +30,15 @@ create table familias (
 create type forma_producto as enum ('REDONDO', 'CUADRADO', 'OVALADO', 'RECTANGULAR', 'OTRO');
 create type perfil_producto as enum ('HONDO', 'TENDIDO', 'PLANO', 'OTRO');
 
+-- Postgres marca enum_out (el cast enum -> text) como STABLE porque
+-- resuelve la etiqueta contra pg_enum. Una columna generada exige
+-- IMMUTABLE, así que envolvemos el cast para poder usarlo en 'descripcion'.
+create function enum_a_texto(anyenum)
+returns text
+language sql
+immutable
+as $$ select $1::text $$;
+
 create table productos (
   id uuid primary key default gen_random_uuid(),
   sku text unique not null,                   -- '004848'
@@ -49,8 +58,8 @@ create table productos (
       coalesce('PLATO ' || marca, '') ||
       coalesce(' #' || trim(trailing '.' from trim(trailing '0' from tamano::text)), '') ||
       coalesce(' ' || linea, '') ||
-      coalesce(' ' || perfil::text, '') ||
-      coalesce(' ' || forma::text, '') ||
+      coalesce(' ' || enum_a_texto(perfil), '') ||
+      coalesce(' ' || enum_a_texto(forma), '') ||
       coalesce(' ' || modelo, '')
     )
   ) stored,

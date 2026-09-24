@@ -21,6 +21,7 @@ abstract final class AppColor {
   static const railText = Color(0xFFCFCABA);
   static const railTextStrong = Color(0xFFFFFFFF);
   static const railTextMuted = Color(0xFF9B9683);
+  static const railTextFaint = Color(0xFF6E6A5C); // pie de página del panel de acceso
 
   // Texto
   static const ink = Color(0xFF14130F);
@@ -67,15 +68,20 @@ abstract final class AppRadius {
   static const button = 5.0;
   static const card = 7.0;
   static const pill = 3.0;
+  static const authControl = 6.0; // campos y botón del formulario de acceso
 }
 
 abstract final class AppSize {
   static const railWidth = 216.0;
+  static const railItemHeight = 38.0;
   static const headerHeight = 62.0;
   static const keyBarHeight = 46.0;
   static const fieldHeight = 36.0;
   static const buttonHeight = 36.0;
   static const authFieldHeight = 44.0; // formularios sin densidad
+  static const authButtonHeight = 46.0;
+  static const authPanelWidth = 560.0; // panel izquierdo de la pantalla de acceso
+  static const authFormWidth = 388.0; // formulario de acceso, centrado
   static const asidePanelWidth = 296.0;
   static const tableRowHeight = 36.0;
   static const compactRowHeight = 30.0; // grilla de compras
