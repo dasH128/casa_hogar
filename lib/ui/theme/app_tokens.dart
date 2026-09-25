@@ -99,6 +99,13 @@ abstract final class AppSize {
   static const warningIconSize = 16.0; // aviso de crédito
   static const stockBarHeight =
       6.0; // barra de disponibilidad del panel de stock
+  static const creditBarHeight =
+      8.0; // barra usado/límite de la ficha de cliente
+  static const clienteAsideWidth =
+      286.0; // panel lateral de la ficha de cliente
+  static const inlineNoticeIconSize =
+      14.0; // aviso en línea dentro de un grid de campos
+  static const listSearchFieldWidth = 420.0; // buscador sobre un listado
 }
 
 /// Tipografía. Requiere el paquete google_fonts.

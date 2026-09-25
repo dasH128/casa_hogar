@@ -6,8 +6,9 @@ import '../theme/app_tokens.dart';
 import 'field_label.dart';
 
 /// Tono de fondo de un [SidePanelCard]. `warn` es el aviso de crédito
-/// del panel lateral de venta.
-enum SidePanelTone { neutral, warn }
+/// del panel lateral de venta; `danger`, el de cuotas vencidas de la
+/// ficha de cliente.
+enum SidePanelTone { neutral, warn, danger }
 
 /// Tarjeta del panel lateral de 296 px: resumen de totales, stock o
 /// avisos. Aporta el borde, el radio y el padding comunes a las tres;
@@ -26,12 +27,11 @@ class SidePanelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final background = tone == SidePanelTone.warn
-        ? AppColor.warnBg
-        : AppColor.surface;
-    final border = tone == SidePanelTone.warn
-        ? AppColor.warnBorder
-        : AppColor.line;
+    final (background, border) = switch (tone) {
+      SidePanelTone.neutral => (AppColor.surface, AppColor.line),
+      SidePanelTone.warn => (AppColor.warnBg, AppColor.warnBorder),
+      SidePanelTone.danger => (AppColor.dangerBg, AppColor.dangerBorder),
+    };
 
     return DecoratedBox(
       decoration: BoxDecoration(

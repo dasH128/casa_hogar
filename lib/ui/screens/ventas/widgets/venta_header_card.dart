@@ -6,30 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../state/doc_identidad.dart';
 import '../../../../state/session_providers.dart';
 import '../../../../state/venta_draft_controller.dart';
 import '../../../../state/venta_draft_models.dart';
 import '../../../../state/venta_reference_providers.dart';
 import '../../../theme/app_tokens.dart';
 import '../../../widgets/app_field.dart';
-
-/// 'DNI'/'RUC' etc. para la etiqueta del documento de identidad. El
-/// catálogo completo vive en `cat_tipo_doc_identidad` (001); esto es
-/// solo la abreviatura para el rótulo del campo, no una validación.
-String _etiquetaDocIdentidad(String codigo) {
-  switch (codigo) {
-    case '1':
-      return 'DNI';
-    case '6':
-      return 'RUC';
-    case '4':
-      return 'Carnet ext.';
-    case '7':
-      return 'Pasaporte';
-    default:
-      return 'Doc.';
-  }
-}
 
 /// Cabecera del documento: grid de 12 columnas en dos filas, tal como
 /// `design/artboards/Main.dc.html`.
@@ -94,7 +77,7 @@ class VentaHeaderCard extends ConsumerWidget {
                   child: AppField(
                     label: cliente == null
                         ? 'Doc.'
-                        : _etiquetaDocIdentidad(cliente.tipoDocIdentidad),
+                        : abreviaturaDocIdentidad(cliente.tipoDocIdentidad),
                     readOnly: true,
                     monospace: true,
                     initialValue: cliente?.numeroDocumento ?? '—',
@@ -331,7 +314,7 @@ class _ClienteSearchDialogState extends ConsumerState<_ClienteSearchDialog> {
                       return ListTile(
                         title: Text(cliente.razonSocial),
                         subtitle: Text(
-                          '${_etiquetaDocIdentidad(cliente.tipoDocIdentidad)} ${cliente.numeroDocumento}',
+                          '${abreviaturaDocIdentidad(cliente.tipoDocIdentidad)} ${cliente.numeroDocumento}',
                         ),
                         onTap: () => Navigator.of(context).pop(cliente),
                       );

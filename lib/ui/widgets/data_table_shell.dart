@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme/app_tokens.dart';
+import 'field_label.dart';
 
 /// Columna de un [DataTableShell]. [width] fija el ancho como en la
 /// grilla de línea de un documento; [numeric] alinea a la derecha.
@@ -27,6 +28,8 @@ class DataTableShell extends StatelessWidget {
     required this.columns,
     required this.rowCount,
     required this.cellBuilder,
+    this.title,
+    this.onRowTap,
     this.activeRowIndex,
     this.compact = false,
     this.trailingRow,
@@ -38,6 +41,14 @@ class DataTableShell extends StatelessWidget {
 
   /// Construye la celda de la fila [row], columna [column].
   final Widget Function(BuildContext context, int row, int column) cellBuilder;
+
+  /// Rótulo de sección sobre la cabecera, dentro de la misma tarjeta
+  /// (p. ej. "Cuenta corriente" en la ficha de cliente).
+  final String? title;
+
+  /// Si se indica, cada fila de datos es clicable (p. ej. un listado
+  /// que abre la ficha de la fila).
+  final ValueChanged<int>? onRowTap;
 
   /// Fila con el cursor: se pinta con `AppColor.rowActive`.
   final int? activeRowIndex;
@@ -72,6 +83,24 @@ class DataTableShell extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppRadius.card),
         child: Column(
           children: [
+            if (title != null) ...[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpace.cardPadding,
+                  AppSpace.md,
+                  AppSpace.cardPadding,
+                  12,
+                ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: FieldLabel(title!),
+                ),
+              ),
+              const ColoredBox(
+                color: AppColor.line,
+                child: SizedBox(height: 1, width: double.infinity),
+              ),
+            ],
             Table(
               columnWidths: columnWidths,
               children: [
@@ -112,17 +141,26 @@ class DataTableShell extends StatelessWidget {
                                 column < columns.length;
                                 column++
                               )
-                                SizedBox(
-                                  height: rowHeight,
-                                  child: Align(
-                                    alignment: columns[column].numeric
-                                        ? Alignment.centerRight
-                                        : Alignment.centerLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: AppSpace.sm,
+                                _TappableCell(
+                                  onTap: onRowTap == null
+                                      ? null
+                                      : () => onRowTap!(row),
+                                  child: SizedBox(
+                                    height: rowHeight,
+                                    child: Align(
+                                      alignment: columns[column].numeric
+                                          ? Alignment.centerRight
+                                          : Alignment.centerLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: AppSpace.sm,
+                                        ),
+                                        child: cellBuilder(
+                                          context,
+                                          row,
+                                          column,
+                                        ),
                                       ),
-                                      child: cellBuilder(context, row, column),
                                     ),
                                   ),
                                 ),
@@ -151,6 +189,28 @@ class DataTableShell extends StatelessWidget {
               ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// `TableRow` no admite gestos: el clic de fila se reparte en cada
+/// celda, con el mismo callback, y sin efecto si [onTap] es null.
+class _TappableCell extends StatelessWidget {
+  const _TappableCell({required this.onTap, required this.child});
+
+  final VoidCallback? onTap;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    if (onTap == null) return child;
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: child,
       ),
     );
   }

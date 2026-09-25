@@ -18,6 +18,8 @@ import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../ui/screens/auth/acceso_screen.dart';
+import '../ui/screens/clientes/cliente_screen.dart';
+import '../ui/screens/clientes/clientes_screen.dart';
 import '../ui/screens/pantalla_pendiente_screen.dart';
 import '../ui/screens/ventas/venta_form_screen.dart';
 
@@ -62,8 +64,17 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/clientes',
+      builder: (context, state) => const ClientesScreen(),
+    ),
+    // Antes que `/clientes/:id`, o "nuevo" se tomaría como un id.
+    GoRoute(
+      path: '/clientes/nuevo',
+      builder: (context, state) => const ClienteScreen(),
+    ),
+    GoRoute(
+      path: '/clientes/:id',
       builder: (context, state) =>
-          const PantallaPendienteScreen(route: '/clientes', titulo: 'Clientes'),
+          ClienteScreen(clienteId: state.pathParameters['id']!),
     ),
     GoRoute(
       path: '/usuarios',
