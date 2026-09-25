@@ -17,11 +17,11 @@ import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../ui/screens/auth/acceso_screen.dart';
-import '../ui/screens/clientes/cliente_screen.dart';
-import '../ui/screens/clientes/clientes_screen.dart';
-import '../ui/screens/pantalla_pendiente_screen.dart';
-import '../ui/screens/ventas/venta_form_screen.dart';
+import '../ui/core/pantalla_pendiente_screen.dart';
+import '../ui/features/acceso/views/acceso_screen.dart';
+import '../ui/features/clientes/views/cliente_ficha_screen.dart';
+import '../ui/features/clientes/views/clientes_screen.dart';
+import '../ui/features/ventas/views/venta_form_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/acceso',
@@ -69,12 +69,12 @@ final appRouter = GoRouter(
     // Antes que `/clientes/:id`, o "nuevo" se tomaría como un id.
     GoRoute(
       path: '/clientes/nuevo',
-      builder: (context, state) => const ClienteScreen(),
+      builder: (context, state) => const ClienteFichaScreen(),
     ),
     GoRoute(
       path: '/clientes/:id',
       builder: (context, state) =>
-          ClienteScreen(clienteId: state.pathParameters['id']!),
+          ClienteFichaScreen(clienteId: state.pathParameters['id']!),
     ),
     GoRoute(
       path: '/usuarios',

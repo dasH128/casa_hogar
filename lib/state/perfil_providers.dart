@@ -1,34 +1,14 @@
 // lib/state/perfil_providers.dart
 //
-// Quién es el usuario ya autenticado: nombre y "Rol · Sucursal" para
-// el pie del rail de `AppShell`. Se llena una vez, justo después del
-// login en `/acceso` (ver `acceso_screen.dart`).
+// Quién es el usuario ya autenticado. Se llena una vez, justo después
+// del login (ver `ui/features/acceso/view_models/acceso_view_model.dart`).
+// La consulta a Supabase vive en `PerfilRepository`.
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PerfilActual {
-  const PerfilActual({
-    required this.nombre,
-    required this.rolCodigo,
-    required this.rolLabel,
-    required this.permisos,
-  });
+import '../domain/models/perfil.dart';
 
-  final String nombre;
-  final String rolCodigo;
-
-  /// "Gerente · Sucursal M", ya formateado para `AppShell.userRoleLabel`.
-  final String rolLabel;
-
-  /// La matriz de permisos del rol (tabla `permisos`, ver
-  /// `001_fundamentos.sql`), como `'recurso.accion'`. Solo para decidir
-  /// qué mostrar en el rail: la autorización real la aplica RLS en
-  /// cada tabla.
-  final Set<String> permisos;
-
-  bool tienePermiso(String recurso, String accion) =>
-      permisos.contains('$recurso.$accion');
-}
+export '../domain/models/perfil.dart';
 
 class PerfilActualNotifier extends Notifier<PerfilActual?> {
   @override

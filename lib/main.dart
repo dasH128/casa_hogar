@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'config/supabase_config.dart';
 import 'routing/app_router.dart';
-import 'ui/screens/supabase_not_configured_screen.dart';
-import 'ui/theme/app_theme.dart';
+import 'ui/core/supabase_not_configured_screen.dart';
+import 'ui/core/theme/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
