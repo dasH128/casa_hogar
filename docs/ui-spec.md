@@ -5,29 +5,96 @@ artboard es un HTML autónomo: ábrelo en el navegador para ver la
 pantalla, o léelo como texto para sacar medidas y colores exactos.
 
 **Regla de oro:** ningún valor de color, espaciado o tipografía se
-escribe en un widget. Todo sale de `lib/ui/theme/app_tokens.dart`. Si
-falta un token, se añade allí, no en la pantalla.
+escribe en un widget. Todo sale de `lib/ui/core/theme/app_tokens.dart`.
+Si falta un token, se añade allí, no en la pantalla.
 
 ---
 
 ## Estructura de carpetas esperada
 
+MVVM por capas, según la arquitectura recomendada por Flutter: la UI se
+agrupa por feature, datos y dominio por tipo.
+
 ```
 lib/
+  data/
+    repositories/          un repositorio por área (cliente, venta, ...)
+    repository_providers.dart   inyección de repositorios (Riverpod)
+    supabase_errors.dart   traduce errores de Supabase a AppFailure
+  domain/
+    models/                modelos inmutables (Decimal, nunca double)
+    failures.dart          AppFailure y sus subtipos
+  state/                   estado global: perfil, sesión, catálogos
+  routing/                 app_router.dart
   ui/
-    theme/        app_tokens.dart, app_theme.dart
-    shell/        AppShell (rail + header + contenido)
-    widgets/      FieldLabel, AppField, StatusPill, DataTableShell,
-                  SidePanelCard, KeyBar, AmountText
-    screens/
-      auth/       acceso_screen.dart
-      ventas/     venta_form_screen.dart
-      compras/    compra_form_screen.dart
-      documentos/ documentos_screen.dart
-      catalogo/   producto_screen.dart
-      clientes/   cliente_screen.dart
-      usuarios/   usuarios_screen.dart
+    core/
+      theme/               app_tokens.dart, app_theme.dart
+      shell/               AppShell (rail + header + contenido)
+      widgets/             FieldLabel, AppField, StatusPill,
+                           DataTableShell, SidePanelCard, KeyBar,
+                           AmountText
+    features/
+      <feature>/
+        view_models/       estado y acciones de la pantalla
+        providers/         consultas y catálogos de solo lectura
+        views/             pantallas; widgets/ para sus partes
 ```
+
+`view_models/` y `providers/` se distinguen por lo que hace cada uno,
+no por la clase de Riverpod:
+
+| Carpeta        | Qué contiene | Forma típica | Ejemplo |
+|----------------|--------------|--------------|---------|
+| `view_models/` | Estado de una pantalla con acciones que lo cambian o escriben en la base de datos (cargar, editar, guardar, confirmar). Uno por pantalla. | Clase `Notifier` expuesta con `NotifierProvider` | `ClienteFichaViewModel`, `VentaFormViewModel` |
+| `providers/`   | Datos que la pantalla solo observa: búsquedas, listados, opciones de desplegables. No escriben nada. | `FutureProvider`, y `StateProvider` para el término de búsqueda | `clientesListaProvider`, `zonasProvider` |
+
+Si un provider empieza a necesitar acciones propias (paginar, marcar,
+borrar), pasa a ser un ViewModel y se mueve a `view_models/`. Los
+catálogos que comparten varias features van en `lib/state/`, no en
+el `providers/` de una de ellas.
+
+### Nombres
+
+Cada pantalla y su ViewModel comparten un mismo prefijo, el de la
+pantalla, no el de un detalle de implementación (por eso es
+`VentaForm`, no `VentaDraft`: la pantalla también abre ventas ya
+confirmadas).
+
+| Pieza      | Archivo                                   | Nombre             |
+|------------|-------------------------------------------|--------------------|
+| Vista      | `views/<prefijo>_screen.dart`             | `<Prefijo>Screen`    |
+| ViewModel  | `view_models/<prefijo>_view_model.dart`   | `<Prefijo>ViewModel` |
+| Estado     | en el mismo archivo del ViewModel         | `<Prefijo>State`     |
+| Provider   | en el mismo archivo del ViewModel         | `<prefijo>Provider`  |
+| Partes     | `views/widgets/<prefijo>_<parte>_card.dart` | `<Prefijo><Parte>Card` |
+| Consultas  | `providers/<tema>_providers.dart`         | `<tema>Provider`, `<tema>QueryProvider` |
+
+Ejemplos actuales:
+
+| Feature  | Vista                | ViewModel               | Estado              | Provider             |
+|----------|----------------------|-------------------------|---------------------|----------------------|
+| acceso   | `AccesoScreen`       | `AccesoViewModel`       | `AccesoState`       | `accesoProvider`     |
+| clientes | `ClienteFichaScreen` | `ClienteFichaViewModel` | `ClienteFichaState` | `clienteFichaProvider` |
+| ventas   | `VentaFormScreen`    | `VentaFormViewModel`    | `VentaFormState`    | `ventaFormProvider`  |
+
+Un listado de solo lectura (como `ClientesScreen` o
+`DocumentosScreen`) no necesita ViewModel: observa los providers de
+`providers/` directamente. Si tiene varios filtros, van juntos en un
+objeto inmutable (`DocumentosQuery`) dentro de un único
+`<tema>QueryProvider`.
+
+Features: `acceso`, `ventas`, `compras`, `documentos`, `catalogo`,
+`clientes`, `usuarios`.
+
+Reglas entre capas:
+- Solo `data/` importa `supabase_flutter`. Los repositorios envuelven
+  cada llamada con `ejecutarConSupabase`, y ViewModels y vistas
+  capturan `AppFailure`, nunca `PostgrestException` ni `AuthException`.
+- Los ViewModels leen los repositorios de `repository_providers.dart`
+  (`ref.read`); no los construyen. Así un test los sustituye con
+  `ProviderScope(overrides: [...])`.
+- Las vistas no consultan datos: pintan el estado del ViewModel y le
+  delegan las acciones.
 
 ## Dependencias
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'config/supabase_config.dart';
@@ -29,6 +30,10 @@ class MorellaApp extends StatelessWidget {
       title: 'Morella',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.build(),
+      // Textos de Material (selector de fechas, menús) en español.
+      locale: const Locale('es', 'PE'),
+      supportedLocales: const [Locale('es', 'PE'), Locale('es')],
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
       routerConfig: appRouter,
     );
   }

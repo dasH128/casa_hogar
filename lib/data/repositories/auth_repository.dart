@@ -2,23 +2,31 @@
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../supabase_errors.dart';
+
 class AuthRepository {
-  SupabaseClient get _db => Supabase.instance.client;
+  AuthRepository(this._db);
+
+  final SupabaseClient _db;
 
   /// Devuelve el id del usuario autenticado, o null si Supabase no lo
-  /// entregó (no debería pasar sin lanzar [AuthException] antes).
+  /// entregó. Credenciales incorrectas lanzan `AutenticacionFailure`.
   Future<String?> iniciarSesion({
     required String email,
     required String password,
-  }) async {
-    final response = await _db.auth.signInWithPassword(
-      email: email,
-      password: password,
-    );
-    return response.user?.id;
+  }) {
+    return ejecutarConSupabase(() async {
+      final response = await _db.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+      return response.user?.id;
+    });
   }
 
   Future<void> recuperarContrasena(String email) {
-    return _db.auth.resetPasswordForEmail(email);
+    return ejecutarConSupabase(() async {
+      return _db.auth.resetPasswordForEmail(email);
+    });
   }
 }

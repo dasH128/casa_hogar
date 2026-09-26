@@ -30,6 +30,8 @@ class DataTableShell extends StatelessWidget {
     required this.cellBuilder,
     this.title,
     this.onRowTap,
+    this.isRowTappable,
+    this.rowColor,
     this.activeRowIndex,
     this.compact = false,
     this.trailingRow,
@@ -50,6 +52,13 @@ class DataTableShell extends StatelessWidget {
   /// que abre la ficha de la fila).
   final ValueChanged<int>? onRowTap;
 
+  /// Con [onRowTap], qué filas responden al clic. Si es null, todas.
+  final bool Function(int row)? isRowTappable;
+
+  /// Fondo propio de una fila (p. ej. `AppColor.warnBg` en un documento
+  /// pendiente de envío). La fila con el cursor tiene prioridad.
+  final Color? Function(int row)? rowColor;
+
   /// Fila con el cursor: se pinta con `AppColor.rowActive`.
   final int? activeRowIndex;
 
@@ -63,6 +72,13 @@ class DataTableShell extends StatelessWidget {
   final Widget? trailingRow;
 
   final Widget? footer;
+
+  VoidCallback? _tapHandlerFor(int row) {
+    final onTap = onRowTap;
+    if (onTap == null) return null;
+    if (!(isRowTappable?.call(row) ?? true)) return null;
+    return () => onTap(row);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +146,7 @@ class DataTableShell extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: row == activeRowIndex
                                   ? AppColor.rowActive
-                                  : null,
+                                  : rowColor?.call(row),
                               border: const Border(
                                 bottom: BorderSide(color: AppColor.lineSoft),
                               ),
@@ -142,9 +158,7 @@ class DataTableShell extends StatelessWidget {
                                 column++
                               )
                                 _TappableCell(
-                                  onTap: onRowTap == null
-                                      ? null
-                                      : () => onRowTap!(row),
+                                  onTap: _tapHandlerFor(row),
                                   child: SizedBox(
                                     height: rowHeight,
                                     child: Align(

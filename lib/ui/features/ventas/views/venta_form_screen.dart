@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../../domain/failures.dart';
 import '../../../../state/perfil_providers.dart';
 import '../../../core/shell/app_shell.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/app_tokens.dart';
 import '../../../core/widgets/key_bar.dart';
 import '../../../core/widgets/status_pill.dart';
-import '../view_models/venta_draft_view_model.dart';
+import '../view_models/venta_form_view_model.dart';
 import 'widgets/venta_credito_aviso_card.dart';
 import 'widgets/venta_header_card.dart';
 import 'widgets/venta_lineas_card.dart';
@@ -49,7 +49,7 @@ class _VentaFormScreenState extends ConsumerState<VentaFormScreen> {
   void initState() {
     super.initState();
     Future.microtask(
-      () => ref.read(ventaDraftProvider.notifier).cargar(widget.documentoId),
+      () => ref.read(ventaFormProvider.notifier).cargar(widget.documentoId),
     );
   }
 
@@ -62,7 +62,7 @@ class _VentaFormScreenState extends ConsumerState<VentaFormScreen> {
   Future<void> _confirmar() async {
     final messenger = ScaffoldMessenger.of(context);
     try {
-      await ref.read(ventaDraftProvider.notifier).confirmar();
+      await ref.read(ventaFormProvider.notifier).confirmar();
     } catch (error) {
       messenger.showSnackBar(
         SnackBar(content: Text('No se pudo confirmar: $error')),
@@ -72,7 +72,7 @@ class _VentaFormScreenState extends ConsumerState<VentaFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final asyncState = ref.watch(ventaDraftProvider);
+    final asyncState = ref.watch(ventaFormProvider);
 
     return asyncState.when(
       loading: () =>
@@ -89,13 +89,13 @@ class _VentaFormScreenState extends ConsumerState<VentaFormScreen> {
   /// directa, RLS rechaza el `insert` y esto explica por qué en vez
   /// de mostrar la excepción cruda de Postgres.
   String _mensajeError(Object error) {
-    if (error is PostgrestException && error.code == '42501') {
+    if (error is SinPermisoFailure) {
       return 'No tienes permiso para crear una venta. Pídeselo a tu administrador.';
     }
     return 'No se pudo abrir el documento.\n$error';
   }
 
-  Widget _buildShell(VentaDraftState state) {
+  Widget _buildShell(VentaFormState state) {
     final doc = state.documento;
     final perfil = ref.watch(perfilActualProvider);
     final numeroDocumento = doc.serie == null
@@ -127,7 +127,7 @@ class _VentaFormScreenState extends ConsumerState<VentaFormScreen> {
             onInvoke: (_) {
               final index = state.focusedLineIndex;
               if (index != null) {
-                ref.read(ventaDraftProvider.notifier).eliminarLinea(index);
+                ref.read(ventaFormProvider.notifier).eliminarLinea(index);
               }
               return null;
             },

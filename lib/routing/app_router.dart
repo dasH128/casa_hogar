@@ -21,6 +21,7 @@ import '../ui/core/pantalla_pendiente_screen.dart';
 import '../ui/features/acceso/views/acceso_screen.dart';
 import '../ui/features/clientes/views/cliente_ficha_screen.dart';
 import '../ui/features/clientes/views/clientes_screen.dart';
+import '../ui/features/documentos/views/documentos_screen.dart';
 import '../ui/features/ventas/views/venta_form_screen.dart';
 
 final appRouter = GoRouter(
@@ -52,10 +53,7 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/documentos',
-      builder: (context, state) => const PantallaPendienteScreen(
-        route: '/documentos',
-        titulo: 'Documentos',
-      ),
+      builder: (context, state) => const DocumentosScreen(),
     ),
     GoRoute(
       path: '/catalogo',

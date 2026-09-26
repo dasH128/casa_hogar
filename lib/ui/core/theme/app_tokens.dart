@@ -69,6 +69,10 @@ abstract final class AppSpace {
   static const xl = 22.0; // padding horizontal del área de contenido
   static const cardPadding =
       16.0; // interior de una tarjeta (cabecera, totales)
+  static const gridGap = 12.0; // entre tarjetas de resumen en grid
+  static const filterGap = 10.0; // entre controles de una barra de filtros
+  static const summaryCardPaddingH = 15.0; // tarjeta de resumen (Documentos)
+  static const summaryCardPaddingV = 13.0;
 }
 
 abstract final class AppRadius {
@@ -106,6 +110,9 @@ abstract final class AppSize {
   static const inlineNoticeIconSize =
       14.0; // aviso en línea dentro de un grid de campos
   static const listSearchFieldWidth = 420.0; // buscador sobre un listado
+  static const filterSelectWidth = 180.0; // desplegable de una barra de filtros
+  static const dateRangeFieldWidth =
+      190.0; // rango de fechas "dd/mm/aaaa – dd/mm/aaaa"
 }
 
 /// Tipografía. Requiere el paquete google_fonts.

@@ -9,7 +9,7 @@ import 'shell/app_shell.dart';
 import 'theme/app_tokens.dart';
 
 /// Placeholder para una ruta del rail que todavía no tiene pantalla
-/// propia (`/compras`, `/documentos`, `/catalogo`,
+/// propia (`/compras`, `/catalogo`,
 /// `/usuarios`). Mantiene el `AppShell` real para poder navegar y ver
 /// el rail funcionando mientras se construye cada pantalla.
 class PantallaPendienteScreen extends ConsumerWidget {

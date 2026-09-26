@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../../domain/failures.dart';
 import '../../../../state/session_providers.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/app_tokens.dart';
@@ -38,7 +38,7 @@ class _AccesoScreenState extends ConsumerState<AccesoScreen> {
     final messenger = ScaffoldMessenger.of(context);
     try {
       final enviado = await ref
-          .read(accesoViewModelProvider.notifier)
+          .read(accesoProvider.notifier)
           .recuperarContrasena(_emailController.text);
       if (enviado) {
         messenger.showSnackBar(
@@ -47,14 +47,14 @@ class _AccesoScreenState extends ConsumerState<AccesoScreen> {
           ),
         );
       }
-    } on AuthException catch (e) {
-      messenger.showSnackBar(SnackBar(content: Text(e.message)));
+    } on AppFailure catch (failure) {
+      messenger.showSnackBar(SnackBar(content: Text(failure.mensaje)));
     }
   }
 
   Future<void> _entrar(List<AlmacenOption> opciones) async {
     final ruta = await ref
-        .read(accesoViewModelProvider.notifier)
+        .read(accesoProvider.notifier)
         .entrar(
           email: _emailController.text,
           password: _passwordController.text,
@@ -66,7 +66,7 @@ class _AccesoScreenState extends ConsumerState<AccesoScreen> {
   @override
   Widget build(BuildContext context) {
     final opcionesAsync = ref.watch(almacenOptionsProvider);
-    final accesoState = ref.watch(accesoViewModelProvider);
+    final accesoState = ref.watch(accesoProvider);
 
     return Scaffold(
       backgroundColor: AppColor.ground,
@@ -87,7 +87,7 @@ class _AccesoScreenState extends ConsumerState<AccesoScreen> {
                       opciones: opciones,
                       almacenId: accesoState.almacenId,
                       onAlmacenChanged: (value) => ref
-                          .read(accesoViewModelProvider.notifier)
+                          .read(accesoProvider.notifier)
                           .seleccionarAlmacen(value),
                       error: accesoState.error,
                       submitting: accesoState.submitting,

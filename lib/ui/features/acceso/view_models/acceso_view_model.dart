@@ -6,10 +6,11 @@
 // `AuthRepository`/`PerfilRepository`.
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../data/repositories/auth_repository.dart';
 import '../../../../data/repositories/perfil_repository.dart';
+import '../../../../data/repository_providers.dart';
+import '../../../../domain/failures.dart';
 import '../../../../state/perfil_providers.dart';
 import '../../../../state/session_providers.dart';
 
@@ -35,8 +36,8 @@ class AccesoState {
 }
 
 class AccesoViewModel extends Notifier<AccesoState> {
-  final _authRepository = AuthRepository();
-  final _perfilRepository = PerfilRepository();
+  AuthRepository get _authRepository => ref.read(authRepositoryProvider);
+  PerfilRepository get _perfilRepository => ref.read(perfilRepositoryProvider);
 
   @override
   AccesoState build() => const AccesoState();
@@ -46,7 +47,7 @@ class AccesoViewModel extends Notifier<AccesoState> {
   }
 
   /// True si hay que avisar "te enviamos un enlace"; lanza
-  /// [AuthException] si Supabase rechaza la solicitud.
+  /// [AutenticacionFailure] si Supabase rechaza la solicitud.
   Future<bool> recuperarContrasena(String email) async {
     if (email.trim().isEmpty) {
       state = state.copyWith(
@@ -99,8 +100,8 @@ class AccesoViewModel extends Notifier<AccesoState> {
       ref.read(perfilActualProvider.notifier).establecer(perfil);
 
       return rutaSegunRol(perfil.rolCodigo);
-    } on AuthException catch (e) {
-      state = state.copyWith(error: e.message);
+    } on AutenticacionFailure catch (failure) {
+      state = state.copyWith(error: failure.mensaje);
       return null;
     } catch (_) {
       state = state.copyWith(
@@ -113,6 +114,6 @@ class AccesoViewModel extends Notifier<AccesoState> {
   }
 }
 
-final accesoViewModelProvider = NotifierProvider<AccesoViewModel, AccesoState>(
+final accesoProvider = NotifierProvider<AccesoViewModel, AccesoState>(
   AccesoViewModel.new,
 );

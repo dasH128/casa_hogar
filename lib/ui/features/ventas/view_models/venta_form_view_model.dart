@@ -1,4 +1,4 @@
-// lib/ui/features/ventas/view_models/venta_draft_view_model.dart
+// lib/ui/features/ventas/view_models/venta_form_view_model.dart
 //
 // Estado mutable del documento de "Nueva venta" en edición. El acceso
 // a Supabase vive en `VentaRepository`; los importes solo cambian
@@ -8,17 +8,18 @@
 
 import 'package:decimal/decimal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../data/repositories/venta_repository.dart';
+import '../../../../data/repository_providers.dart';
+import '../../../../domain/failures.dart';
 import '../../../../domain/models/catalogos.dart';
 import '../../../../domain/models/venta_models.dart';
 import '../../../../state/catalogos_providers.dart';
 import '../../../../state/session_providers.dart';
 import '../providers/venta_busqueda_providers.dart';
 
-class VentaDraftState {
-  const VentaDraftState({
+class VentaFormState {
+  const VentaFormState({
     required this.documento,
     required this.lineas,
     this.clienteResumen,
@@ -43,7 +44,7 @@ class VentaDraftState {
   LineaVentaDraft? get lineaEnfocada =>
       focusedLineIndex == null ? null : lineas[focusedLineIndex!];
 
-  VentaDraftState copyWith({
+  VentaFormState copyWith({
     DocumentoVentaDraft? documento,
     List<LineaVentaDraft>? lineas,
     ClienteResumen? clienteResumen,
@@ -54,7 +55,7 @@ class VentaDraftState {
     bool clearAvisoCredito = false,
     bool? guardando,
   }) {
-    return VentaDraftState(
+    return VentaFormState(
       documento: documento ?? this.documento,
       lineas: lineas ?? this.lineas,
       clienteResumen: clienteResumen ?? this.clienteResumen,
@@ -70,15 +71,15 @@ class VentaDraftState {
   }
 }
 
-class VentaDraftViewModel extends Notifier<AsyncValue<VentaDraftState>> {
-  final _repository = VentaRepository();
+class VentaFormViewModel extends Notifier<AsyncValue<VentaFormState>> {
+  VentaRepository get _repository => ref.read(ventaRepositoryProvider);
 
   @override
-  AsyncValue<VentaDraftState> build() => const AsyncValue.loading();
+  AsyncValue<VentaFormState> build() => const AsyncValue.loading();
 
-  VentaDraftState get _current => state.requireValue;
+  VentaFormState get _current => state.requireValue;
 
-  void _update(VentaDraftState Function(VentaDraftState) transform) {
+  void _update(VentaFormState Function(VentaFormState) transform) {
     state = AsyncValue.data(transform(_current));
   }
 
@@ -95,7 +96,7 @@ class VentaDraftViewModel extends Notifier<AsyncValue<VentaDraftState>> {
           ? null
           : await _repository.obtenerClienteResumen(documento.clienteId!);
       state = AsyncValue.data(
-        VentaDraftState(
+        VentaFormState(
           documento: documento,
           lineas: lineas,
           clienteResumen: cliente,
@@ -116,7 +117,6 @@ class VentaDraftViewModel extends Notifier<AsyncValue<VentaDraftState>> {
     return _repository.crearBorrador(
       sucursalId: sesion.sucursalId,
       almacenId: sesion.almacenId,
-      creadoPor: Supabase.instance.client.auth.currentUser!.id,
     );
   }
 
@@ -291,25 +291,22 @@ class VentaDraftViewModel extends Notifier<AsyncValue<VentaDraftState>> {
 
   /// Confirma el documento. Si `confirmar_documento()` rechaza por
   /// límite de crédito, el mensaje del servidor pasa tal cual a
-  /// [VentaDraftState.avisoCredito]; cualquier otro error se relanza
-  /// para que la pantalla lo muestre.
+  /// [VentaFormState.avisoCredito]; cualquier otro [AppFailure] se
+  /// relanza para que la pantalla lo muestre.
   Future<void> confirmar() async {
     _update((s) => s.copyWith(guardando: true, clearAvisoCredito: true));
     try {
       final documento = await _repository.confirmar(_current.documento.id);
-      _update((s) => s.copyWith(documento: documento, guardando: false));
-    } on PostgrestException catch (e) {
-      if (e.message.contains('Límite de crédito excedido')) {
-        _update((s) => s.copyWith(avisoCredito: e.message, guardando: false));
-        return;
-      }
+      _update((s) => s.copyWith(documento: documento));
+    } on LimiteCreditoFailure catch (failure) {
+      _update((s) => s.copyWith(avisoCredito: failure.mensaje));
+    } finally {
       _update((s) => s.copyWith(guardando: false));
-      rethrow;
     }
   }
 }
 
-final ventaDraftProvider =
-    NotifierProvider<VentaDraftViewModel, AsyncValue<VentaDraftState>>(
-      VentaDraftViewModel.new,
+final ventaFormProvider =
+    NotifierProvider<VentaFormViewModel, AsyncValue<VentaFormState>>(
+      VentaFormViewModel.new,
     );

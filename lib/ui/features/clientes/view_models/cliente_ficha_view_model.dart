@@ -7,9 +7,10 @@
 // acceso a Supabase vive en `ClienteRepository`.
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../data/repositories/cliente_repository.dart';
+import '../../../../data/repository_providers.dart';
+import '../../../../domain/failures.dart';
 import '../../../../domain/models/cliente_models.dart';
 import '../providers/clientes_lista_providers.dart';
 
@@ -49,7 +50,7 @@ class GuardarClienteFailure implements Exception {
 }
 
 class ClienteFichaViewModel extends Notifier<AsyncValue<ClienteFichaState>> {
-  final _repository = ClienteRepository();
+  ClienteRepository get _repository => ref.read(clienteRepositoryProvider);
 
   @override
   AsyncValue<ClienteFichaState> build() => const AsyncValue.loading();
@@ -89,8 +90,8 @@ class ClienteFichaViewModel extends Notifier<AsyncValue<ClienteFichaState>> {
     state = AsyncValue.data(_current.copyWith(guardando: true));
     try {
       return ficha.esNuevo ? await _insertar(ficha) : await _actualizar(ficha);
-    } on PostgrestException catch (error) {
-      throw GuardarClienteFailure(_mensajeGuardado(error));
+    } on AppFailure catch (failure) {
+      throw GuardarClienteFailure(_mensajeGuardado(failure));
     } finally {
       state = AsyncValue.data(_current.copyWith(guardando: false));
     }
@@ -113,11 +114,12 @@ class ClienteFichaViewModel extends Notifier<AsyncValue<ClienteFichaState>> {
     return id;
   }
 
-  String _mensajeGuardado(PostgrestException error) {
-    return switch (error.code) {
-      '23505' => 'Ya existe un cliente con ese tipo y número de documento.',
-      '42501' => 'No tienes permiso para guardar clientes.',
-      _ => error.message,
+  String _mensajeGuardado(AppFailure failure) {
+    return switch (failure) {
+      RegistroDuplicadoFailure() =>
+        'Ya existe un cliente con ese tipo y número de documento.',
+      SinPermisoFailure() => 'No tienes permiso para guardar clientes.',
+      _ => failure.mensaje,
     };
   }
 }

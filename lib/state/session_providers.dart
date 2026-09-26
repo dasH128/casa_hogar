@@ -6,16 +6,14 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../data/repositories/sesion_repository.dart';
+import '../data/repository_providers.dart';
 import '../domain/models/sesion.dart';
 
 export '../domain/models/sesion.dart';
 
-final _sesionRepository = SesionRepository();
-
 /// Almacenes activos, con su sucursal, para el selector de /acceso.
 final almacenOptionsProvider = FutureProvider<List<AlmacenOption>>(
-  (ref) => _sesionRepository.obtenerAlmacenes(),
+  (ref) => ref.watch(sesionRepositoryProvider).obtenerAlmacenes(),
 );
 
 class SesionNotifier extends Notifier<SesionSeleccion?> {

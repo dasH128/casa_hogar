@@ -13,19 +13,19 @@ import '../../../../../state/session_providers.dart';
 import '../../../../core/theme/app_tokens.dart';
 import '../../../../core/widgets/app_field.dart';
 import '../../providers/venta_busqueda_providers.dart';
-import '../../view_models/venta_draft_view_model.dart';
+import '../../view_models/venta_form_view_model.dart';
 
 /// Cabecera del documento: grid de 12 columnas en dos filas, tal como
 /// `design/artboards/Main.dc.html`.
 class VentaHeaderCard extends ConsumerWidget {
   const VentaHeaderCard({super.key, required this.state});
 
-  final VentaDraftState state;
+  final VentaFormState state;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final doc = state.documento;
-    final notifier = ref.read(ventaDraftProvider.notifier);
+    final notifier = ref.read(ventaFormProvider.notifier);
     final cliente = state.clienteResumen;
 
     final serieNumero = doc.serie == null

@@ -11,7 +11,7 @@ import '../../../../core/theme/app_tokens.dart';
 import '../../../../core/widgets/amount_text.dart';
 import '../../../../core/widgets/data_table_shell.dart';
 import '../../providers/venta_busqueda_providers.dart';
-import '../../view_models/venta_draft_view_model.dart';
+import '../../view_models/venta_form_view_model.dart';
 
 const _columnas = [
   DataTableColumn(label: '#', width: FixedColumnWidth(34), numeric: true),
@@ -33,7 +33,7 @@ class VentaLineasCard extends ConsumerStatefulWidget {
     required this.buscadorFocus,
   });
 
-  final VentaDraftState state;
+  final VentaFormState state;
   final FocusNode buscadorFocus;
 
   @override
@@ -59,7 +59,7 @@ class _VentaLineasCardState extends ConsumerState<VentaLineasCard> {
       final node = FocusNode();
       node.addListener(() {
         if (node.hasFocus) {
-          ref.read(ventaDraftProvider.notifier).enfocarLinea(row);
+          ref.read(ventaFormProvider.notifier).enfocarLinea(row);
         }
       });
       return node;
@@ -70,7 +70,7 @@ class _VentaLineasCardState extends ConsumerState<VentaLineasCard> {
     final valor = Decimal.tryParse(texto);
     if (valor != null) {
       ref
-          .read(ventaDraftProvider.notifier)
+          .read(ventaFormProvider.notifier)
           .actualizarLinea(row, cantidad: valor);
     }
   }
@@ -79,7 +79,7 @@ class _VentaLineasCardState extends ConsumerState<VentaLineasCard> {
     final valor = Decimal.tryParse(texto);
     if (valor != null) {
       ref
-          .read(ventaDraftProvider.notifier)
+          .read(ventaFormProvider.notifier)
           .actualizarLinea(row, precioUnitario: valor);
     }
   }
@@ -87,9 +87,7 @@ class _VentaLineasCardState extends ConsumerState<VentaLineasCard> {
   void _guardarDescuento(int row, String texto) {
     final valor = texto.trim().isEmpty ? Decimal.zero : Decimal.tryParse(texto);
     if (valor != null) {
-      ref
-          .read(ventaDraftProvider.notifier)
-          .actualizarLinea(row, dto1Pct: valor);
+      ref.read(ventaFormProvider.notifier).actualizarLinea(row, dto1Pct: valor);
     }
   }
 
@@ -104,7 +102,7 @@ class _VentaLineasCardState extends ConsumerState<VentaLineasCard> {
     final presentacion = producto.presentacionSugerida;
     if (presentacion == null) return;
     await ref
-        .read(ventaDraftProvider.notifier)
+        .read(ventaFormProvider.notifier)
         .agregarLinea(producto, presentacion);
     _buscadorController.clear();
   }

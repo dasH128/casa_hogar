@@ -6,17 +6,15 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../data/repositories/catalogos_repository.dart';
+import '../data/repository_providers.dart';
 import '../domain/models/catalogos.dart';
-
-final _catalogosRepository = CatalogosRepository();
 
 /// Condiciones de pago activas, para el desplegable de cabecera.
 final condicionesPagoProvider = FutureProvider<List<CondicionPagoOption>>(
-  (ref) => _catalogosRepository.obtenerCondicionesPago(),
+  (ref) => ref.watch(catalogosRepositoryProvider).obtenerCondicionesPago(),
 );
 
 /// Vendedores activos, para el desplegable de cabecera.
 final vendedoresProvider = FutureProvider<List<VendedorOption>>(
-  (ref) => _catalogosRepository.obtenerVendedores(),
+  (ref) => ref.watch(catalogosRepositoryProvider).obtenerVendedores(),
 );

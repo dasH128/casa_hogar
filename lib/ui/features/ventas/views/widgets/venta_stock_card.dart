@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme/app_tokens.dart';
 import '../../../../core/widgets/side_panel_card.dart';
-import '../../view_models/venta_draft_view_model.dart';
+import '../../view_models/venta_form_view_model.dart';
 
 /// Disponibilidad de la línea con el foco, leída de `stock_actual`
 /// (ver `VentaRepository`): nunca sumada en Dart.
 class VentaStockCard extends StatelessWidget {
   const VentaStockCard({super.key, required this.state});
 
-  final VentaDraftState state;
+  final VentaFormState state;
 
   @override
   Widget build(BuildContext context) {
